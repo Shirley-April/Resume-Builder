@@ -1,16 +1,6 @@
 import { useState } from "react";
 
-import {
-  Box,
-  Button,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
 import FormikCustomInput from "../../Atoms/FormikCustomInput";
 
@@ -30,6 +20,7 @@ const ResumeFormInputs = () => {
       Company: "",
       description: "NA",
     },
+    skills: "",
   });
 
   const handleChangeContact = (event) => {
@@ -64,7 +55,18 @@ const ResumeFormInputs = () => {
     }));
   };
 
-  console.log("EXPERIENCE::", inputs.workExperience);
+  const handleChangeSkills = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setInputs((prevState) => ({
+      ...prevState,
+      skills: value,
+    }));
+  };
+
+  // console.log("EXPERIENCE::", inputs.workExperience);
+  console.log("SKILLS::", inputs.skills);
 
   const contactInfo = [
     "Job Title",
@@ -168,9 +170,14 @@ const ResumeFormInputs = () => {
       <Stack spacing={2}>
         <Typography variant="h5">Skills</Typography>
         <Box>
-          {skills.map((skill) => (
-            <Typography key={skill}>{skill}</Typography>
-          ))}
+          <TextField
+            label="Skills"
+            name="skills"
+            id="skills"
+            multiline
+            fullWidth
+            onChange={handleChangeSkills}
+          />
         </Box>
       </Stack>
 
@@ -198,6 +205,3 @@ const ResumeFormInputs = () => {
 };
 
 export default ResumeFormInputs;
-
-// add experience to store data and clear form
-//
