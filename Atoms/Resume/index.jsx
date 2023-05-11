@@ -1,7 +1,8 @@
 import { Grid, Stack, Typography, Box } from "@mui/material";
 import { data } from "./data";
 
-const Resume = ({ props }) => {
+const Resume = ({ inputs }) => {
+
   return (
     <Stack border={1} p={2}>
       <Stack>
