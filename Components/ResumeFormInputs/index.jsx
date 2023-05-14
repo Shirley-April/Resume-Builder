@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import { useDispatch } from "react-redux";
+import { addContact, addSummary, addExperience, addEducation, addSkills,  } from "../../features/resumeSlice";
+
 import dayjs from "dayjs";
 
 import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
@@ -16,36 +19,28 @@ import Education from "./Education";
 const ResumeFormInputs = ({ inputs, setInputs }) => {
   const [value, setValue] = useState(dayjs("2022-04-17"));
 
-  console.log("DATA", inputs);
-
-  const experiences = [
-    "Collaborated with team member to ensure...",
-    "Collaborated with team member to ensure...",
-  ];
-
-  const skills = [
-    "JavaScript",
-    "Next Js",
-    "Node Js",
-    "Material UI",
-    "React native",
-  ];
-
-  const education = ["School Name", "Field of study"];
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    alert(JSON.stringify(inputs, null, 2));
+    dispatch(addContact(inputs.contact));
+    dispatch(addSummary(inputs.summary));
+    dispatch(addExperience(inputs.workExperience))
+    dispatch(addEducation(inputs.education))
+    dispatch(addSkills(inputs.skills))
   };
 
   return (
     <Stack p={8} spacing={2}>
       <Contact setInputs={setInputs} />
       <ProfessionalSummary setInputs={setInputs} />
-      <WorkExperience setInputs={setInputs} />
+      <WorkExperience setInputs={setInputs} inputs={inputs} />
       <Skills setInputs={setInputs} />
       <Education setInputs={setInputs} />
 
-      <Button variant="contained" onClick={handleSubmit}>
+      <Button
+        variant="contained"
+        onClick={() => handleSubmit()}
+      >
         Submit
       </Button>
     </Stack>

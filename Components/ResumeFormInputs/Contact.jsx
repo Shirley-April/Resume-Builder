@@ -20,7 +20,7 @@ const Contact = ({ setInputs }) => {
     "phone",
     "email",
     "linkedin",
-    "gitbub",
+    "github",
   ];
 
   const labels = ["Job Title", "Name", "Phone", "Email", "LinkedIn", "GitHub"];

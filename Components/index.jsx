@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+
+import debounce from "lodash.debounce";
 
 import { Box, Grid, Stack } from "@mui/material";
 
@@ -6,13 +8,13 @@ import ResumeFormInputs from "./ResumeFormInputs";
 import ResumePreview from "./ResumePreview";
 
 const Resume = () => {
-  const [inputs, setInputs] = useState({
+  const [inputs, setInput] = useState({
     contact: {
-      "jobTitle": "",
+      jobTitle: "",
       name: "Shirley",
       phone: "",
       email: "",
-      linkedn: "",
+      linkedin: "",
       github: "",
     },
     summary: "",
@@ -27,6 +29,9 @@ const Resume = () => {
       fieldOfStudy: "Full Stack Software Development",
     },
   });
+
+  const setInputs = useMemo(() => debounce(setInput, 500));
+
   return (
     <Box>
       <Grid container sx={{ background: "#dcebf7" }} spacing={2}>
