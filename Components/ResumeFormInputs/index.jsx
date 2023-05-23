@@ -34,8 +34,8 @@ const ResumeFormInputs = ({ inputs, setInputs }) => {
       <Contact setInputs={setInputs} />
       <ProfessionalSummary setInputs={setInputs} />
       <WorkExperience setInputs={setInputs} inputs={inputs} />
-      <Skills setInputs={setInputs} />
-      <Education setInputs={setInputs} />
+      <Skills setInputs={setInputs} inputs={inputs}/>
+      <Education setInputs={setInputs} inputs={inputs}/>
 
       <Button
         variant="contained"

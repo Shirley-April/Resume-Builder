@@ -8,11 +8,30 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import TextFieldCustomInput from "../../Atoms/TextFieldCustomInput";
 import { useState } from "react";
 
-const Education = ({ setInputs }) => {
-  const [value, setValue] = useState(dayjs("2022-04-17"));
-
+const Education = ({ setInputs, inputs }) => {
   const education = ["school", "fieldOfStudy"];
 
+  const handleStartDate = (newValue) => {
+    const formattedEndDate = newValue.format("MMMM YYYY");
+    console.log(formattedEndDate);
+    setInputs((prevState) => ({
+      ...prevState,
+      education: {
+        ...prevState.education,
+        startDate: newValue,
+      },
+    }));
+  };
+
+  const handleEndDate = (newValue) => {
+    setInputs((prevState) => ({
+      ...prevState,
+      education: {
+        ...prevState.education,
+        endDate: newValue,
+      },
+    }));
+  };
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -44,15 +63,21 @@ const Education = ({ setInputs }) => {
             <Stack width="100%">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label="Start Date"
-                  value={value}
-                  onChange={(newValue) => setValue(newValue)}
+                  label={"Start Date"}
+                  views={["month", "year"]}
+                  value={inputs.education.startDate}
+                  onChange={handleStartDate}
                 />
               </LocalizationProvider>
             </Stack>
             <Stack width="100%">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker label="End Date" />
+                <DatePicker
+                  label={"End Date"}
+                  views={["month", "year"]}
+                  value={inputs.education.endDate}
+                  onChange={handleEndDate}
+                />
               </LocalizationProvider>
             </Stack>
           </Stack>
