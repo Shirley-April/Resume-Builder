@@ -7,6 +7,8 @@ import { Box, Grid, Stack } from "@mui/material";
 import ResumeFormInputs from "./ResumeFormInputs";
 import ResumePreview from "./ResumePreview";
 
+import dayjs from "dayjs";
+
 const Resume = () => {
   const [inputs, setInput] = useState({
     contact: {
@@ -23,14 +25,18 @@ const Resume = () => {
       company: "",
       description: "NA",
     },
-    skills: "",
+    skills: "•",
     education: {
       school: "AkiraChix",
       fieldOfStudy: "Full Stack Software Development",
+      startDate: dayjs("Jan 2023"),
+      endDate: dayjs("Dec 2023")
     },
   });
 
-  const setInputs = useMemo(() => debounce(setInput, 500));
+  // console.log("EDUCATION", inputs.education);
+
+  const setInputs = useMemo(() => debounce(setInput, 50));
 
   return (
     <Box>
