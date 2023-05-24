@@ -1,7 +1,14 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import { useDispatch } from "react-redux";
-import { addContact, addSummary, addExperience, addEducation, addSkills,  } from "../../features/resumeSlice";
+import {
+  addContact,
+  addSummary,
+  addExperience,
+  addEducation,
+  addSkills,
+} from "../../features/resumeSlice";
 
 import dayjs from "dayjs";
 
@@ -17,6 +24,7 @@ import Skills from "./Skills";
 import Education from "./Education";
 
 const ResumeFormInputs = ({ inputs, setInputs }) => {
+  const router = useRouter();
   const [value, setValue] = useState(dayjs("2022-04-17"));
 
   const dispatch = useDispatch();
@@ -24,9 +32,10 @@ const ResumeFormInputs = ({ inputs, setInputs }) => {
   const handleSubmit = () => {
     dispatch(addContact(inputs.contact));
     dispatch(addSummary(inputs.summary));
-    dispatch(addExperience(inputs.workExperience))
-    dispatch(addEducation(inputs.education))
-    dispatch(addSkills(inputs.skills))
+    dispatch(addExperience(inputs.workExperience));
+    dispatch(addEducation(inputs.education));
+    dispatch(addSkills(inputs.skills));
+    router.push("final-resume");
   };
 
   return (
@@ -34,12 +43,14 @@ const ResumeFormInputs = ({ inputs, setInputs }) => {
       <Contact setInputs={setInputs} />
       <ProfessionalSummary setInputs={setInputs} />
       <WorkExperience setInputs={setInputs} inputs={inputs} />
-      <Skills setInputs={setInputs} inputs={inputs}/>
-      <Education setInputs={setInputs} inputs={inputs}/>
+      <Skills setInputs={setInputs} inputs={inputs} />
+      <Education setInputs={setInputs} inputs={inputs} />
 
       <Button
         variant="contained"
-        onClick={() => handleSubmit()}
+        onClick={() => {
+          handleSubmit();
+        }}
       >
         Submit
       </Button>
