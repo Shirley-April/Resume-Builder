@@ -36,7 +36,7 @@ const Resume = () => {
 
   // console.log("EDUCATION", inputs.education);
 
-  const setInputs = useMemo(() => debounce(setInput, 50));
+  // const setInputs = useMemo(() => debounce(setInput, 50));
 
   return (
     <Box>
