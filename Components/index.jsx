@@ -10,7 +10,7 @@ import ResumePreview from "./ResumePreview";
 import dayjs from "dayjs";
 
 const Resume = () => {
-  const [inputs, setInput] = useState({
+  const [inputs, setInputs] = useState({
     contact: {
       jobTitle: "",
       name: "Shirley",
