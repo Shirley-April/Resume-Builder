@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { deleteExperience } from "../../../../features/resumeSlice";
 
 import {
   Typography,
@@ -9,8 +11,10 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  IconButton,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import WorkExperience from "../../WorkExperience";
 import EditExperence from "../EditExperience";
@@ -23,6 +27,7 @@ const JobHistory = ({
   inputs,
 }) => {
   const jobHistory = useSelector((state) => state.resume.workExperience);
+  const dispatch = useDispatch()
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -43,9 +48,14 @@ const JobHistory = ({
               sx={{ border: 1 }}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Stack justifyContent="space-between" direction="row" width="100%">
                 <Typography>
                   {value.jobTitle} | {value.company}
                 </Typography>
+                <IconButton onClick={() => dispatch(deleteExperience(value))}>
+                <DeleteIcon />
+                </IconButton>
+                </Stack>
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>Display Form Here!</Typography>

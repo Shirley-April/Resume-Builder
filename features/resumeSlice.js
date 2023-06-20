@@ -80,6 +80,15 @@ const resumeSlice = createSlice({
         existingExperience.description = description;
       }
     },
+    deleteExperience(state, action) {
+      const existingExperience = state.workExperience.findIndex(
+        (exp) => exp.id === action.payload.id
+      );
+
+      if (existingExperience !== -1) {
+        state.workExperience.splice(existingExperience, 1);
+      }
+    },
     addSkills(state, action) {
       return { ...state, skills: action.payload };
     },
@@ -96,5 +105,6 @@ export const {
   addSummary,
   addSkills,
   addEducation,
+  deleteExperience,
 } = resumeSlice.actions;
 export default resumeSlice.reducer;
