@@ -12,13 +12,12 @@ const Education = ({ setInputs, inputs }) => {
   const education = ["school", "fieldOfStudy"];
 
   const handleStartDate = (newValue) => {
-    const formattedEndDate = newValue.format("MMMM YYYY");
-    console.log(formattedEndDate);
+    console.log("DATE", formattedEndDate);
     setInputs((prevState) => ({
       ...prevState,
       education: {
         ...prevState.education,
-        startDate: newValue,
+        startDate: newValue.format("MMMM YYYY"),
       },
     }));
   };
@@ -28,7 +27,7 @@ const Education = ({ setInputs, inputs }) => {
       ...prevState,
       education: {
         ...prevState.education,
-        endDate: newValue,
+        endDate: newValue.format("MMMM YYYY"),
       },
     }));
   };
