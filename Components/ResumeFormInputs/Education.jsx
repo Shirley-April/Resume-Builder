@@ -1,47 +1,15 @@
 import { Stack, Typography, Grid } from "@mui/material";
-import dayjs from "dayjs";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import TextFieldCustomInput from "../../Atoms/TextFieldCustomInput";
-import { useState } from "react";
+import FormikCustomInput from "../../Atoms/FormikCustomInput";
 
-const Education = ({ setInputs, inputs }) => {
+const Education = ({ setFieldValue, values }) => {
+  console.log("Education Value", values.endDate);
+
   const education = ["school", "fieldOfStudy"];
-
-  const handleStartDate = (newValue) => {
-    console.log("DATE", formattedEndDate);
-    setInputs((prevState) => ({
-      ...prevState,
-      education: {
-        ...prevState.education,
-        startDate: newValue.format("MMMM YYYY"),
-      },
-    }));
-  };
-
-  const handleEndDate = (newValue) => {
-    setInputs((prevState) => ({
-      ...prevState,
-      education: {
-        ...prevState.education,
-        endDate: newValue.format("MMMM YYYY"),
-      },
-    }));
-  };
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({
-      ...values,
-      education: {
-        ...values.education,
-        [name]: value,
-      },
-    }));
-  };
 
   return (
     <Stack>
@@ -49,11 +17,9 @@ const Education = ({ setInputs, inputs }) => {
       <Grid container spacing={3}>
         {education.map((education) => (
           <Grid item key={education} md={6} xs={12}>
-            <TextFieldCustomInput
+            <FormikCustomInput
               key={education}
-              name={education}
-              label={education}
-              onChange={handleChange}
+              name={`education.${education}`}
             />
           </Grid>
         ))}
@@ -62,10 +28,16 @@ const Education = ({ setInputs, inputs }) => {
             <Stack width="100%">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
+                  name="education.startDate"
                   label={"Start Date"}
                   views={["month", "year"]}
-                  value={inputs.education.startDate}
-                  onChange={handleStartDate}
+                  // value={inputs.education.startDate}
+                  onChange={(newValue) =>
+                    setFieldValue(
+                      "education.startDate",
+                      newValue.format("MMMM YYYY")
+                    )
+                  }
                 />
               </LocalizationProvider>
             </Stack>
@@ -74,8 +46,13 @@ const Education = ({ setInputs, inputs }) => {
                 <DatePicker
                   label={"End Date"}
                   views={["month", "year"]}
-                  value={inputs.education.endDate}
-                  onChange={handleEndDate}
+                  // value={values.endDate}
+                  onChange={(newValue) =>
+                    setFieldValue(
+                      "education.endDate",
+                      newValue.format("MMMM YYYY")
+                    )
+                  }
                 />
               </LocalizationProvider>
             </Stack>

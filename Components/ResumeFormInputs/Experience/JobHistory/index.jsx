@@ -14,27 +14,19 @@ import {
   IconButton,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import WorkExperience from "../../WorkExperience";
 import EditExperence from "../EditExperience";
 
-const JobHistory = ({
-  form,
-  handleOpenForm,
-  handleCloseForm,
-  setInputs,
-  inputs,
-}) => {
+const JobHistory = ({ form, handleOpenForm, handleCloseForm, values }) => {
   const jobHistory = useSelector((state) => state.resume.workExperience);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
-  console.log("History", jobHistory);
 
   return (
     <Stack spacing={5}>
@@ -48,22 +40,22 @@ const JobHistory = ({
               sx={{ border: 1 }}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Stack justifyContent="space-between" direction="row" width="100%">
-                <Typography>
-                  {value.jobTitle} | {value.company}
-                </Typography>
-                <IconButton onClick={() => dispatch(deleteExperience(value))}>
-                <DeleteIcon />
-                </IconButton>
+                <Stack
+                  justifyContent="space-between"
+                  direction="row"
+                  width="100%"
+                >
+                  <Typography>
+                    {value.jobTitle} | {value.company}
+                  </Typography>
+                  <IconButton onClick={() => dispatch(deleteExperience(value))}>
+                    <DeleteIcon />
+                  </IconButton>
                 </Stack>
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>Display Form Here!</Typography>
-                <EditExperence
-                  setInputs={setInputs}
-                  inputs={inputs}
-                  value={value}
-                />
+                <EditExperence value={value} />
               </AccordionDetails>
             </Accordion>
           </Box>
@@ -76,7 +68,7 @@ const JobHistory = ({
       </Stack>
       {form && (
         <Stack spacing={2}>
-          <WorkExperience setInputs={setInputs} inputs={inputs} />{" "}
+          <WorkExperience handleCloseForm={handleCloseForm} values={values} />{" "}
           <Button variant="contained" onClick={handleCloseForm}>
             Close
           </Button>

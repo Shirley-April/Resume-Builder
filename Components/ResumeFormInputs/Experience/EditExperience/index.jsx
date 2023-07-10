@@ -1,26 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { editExperience } from "../../../../features/resumeSlice";
 
-import { Stack, Typography, Button, Grid, Box } from "@mui/material";
-import TextFieldCustomInput from "../../../../Atoms/TextFieldCustomInput";
+import { Stack, Button, Grid, Box } from "@mui/material";
+import FormikCustomInput from "../../../../Atoms/FormikCustomInput";
 
-const EditExperence = ({ setInputs, inputs, value }) => {
+const EditExperence = ({ value }) => {
   const resume = useSelector((state) => state.resume);
   const dispatch = useDispatch();
 
   // console.log("Edit value", value);
-
-  const handleChangeExperience = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((prevState) => ({
-      ...prevState,
-      workExperience: {
-        ...prevState.workExperience,
-        [name]: value,
-      },
-    }));
-  };
 
   const payload = {};
 
@@ -34,12 +22,11 @@ const EditExperence = ({ setInputs, inputs, value }) => {
             <Grid item key={experience} md={6} xs={12}>
               {console.log("VVVVV", value[experience])}
               <Stack spacing={2}>
-                <TextFieldCustomInput
-                  name={experience}
-                  label={experience}
+                <FormikCustomInput
+                  name={`experience.${experience}`}
+                  // label={experience}
                   // value={value[experience]}
-                  defaultValue={value[experience]}
-                  onChange={handleChangeExperience}
+                  // defaultValue={value[experience]}
                 />
               </Stack>
             </Grid>
@@ -47,20 +34,19 @@ const EditExperence = ({ setInputs, inputs, value }) => {
         </Stack>
       </Grid>
       <Box>
-        <TextFieldCustomInput
+        <FormikCustomInput
           label="Work Description"
-          value={value.description}
+          // value={value.description}
           multiline
-          onChange={handleChangeExperience}
-          name="description"
+          name="workExperience.description"
         />
       </Box>
       <Button
         variant="outlined"
         fullWidth
-        onClick={() =>
-          dispatch(editExperience({ ...inputs.workExperience, id: value.id }))
-        }
+        // onClick={() =>
+        //   dispatch(editExperience({ ...inputs.workExperience, id: value.id }))
+        // }
       >
         Add Experience
       </Button>

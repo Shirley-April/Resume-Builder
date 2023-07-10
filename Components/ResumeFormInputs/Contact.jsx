@@ -1,19 +1,7 @@
 import { Grid, Typography, Box, Stack } from "@mui/material";
-import TextFieldCustomInput from "../../Atoms/TextFieldCustomInput";
+import FormikCustomInput from "../../Atoms/FormikCustomInput";
 
-const Contact = ({ setInputs }) => {
-  const handleChangeContact = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({
-      ...values,
-      contact: {
-        ...values.contact,
-        [name]: value,
-      },
-    }));
-  };
-
+const Contact = () => {
   const contactInfo = [
     "jobTitle",
     "name",
@@ -32,12 +20,8 @@ const Contact = ({ setInputs }) => {
         {contactInfo.map((contact, index) => (
           <Grid item xs={12} md={6} key={index}>
             <Stack spacing={2}>
-              <TextFieldCustomInput
-                name={contact}
-                id={contact}
-                onChange={handleChangeContact}
-                label={contact}
-              />
+              <Typography>{contact}</Typography>
+              <FormikCustomInput name={`contact.${contact}`} id={contact} />
             </Stack>
           </Grid>
         ))}

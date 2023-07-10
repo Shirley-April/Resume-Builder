@@ -37,14 +37,14 @@ const ResumeFormInputs = ({ inputs, setInputs }) => {
       <Skills setInputs={setInputs} inputs={inputs} />
       <Education setInputs={setInputs} inputs={inputs} />
 
-      <Button
+      {/* <Button
         variant="contained"
         onClick={() => {
           handleSubmit();
         }}
       >
         Submit
-      </Button>
+      </Button> */}
     </Stack>
   );
 };
