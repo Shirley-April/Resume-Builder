@@ -3,24 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Stack, Grid, Typography, Box, Button } from "@mui/material";
 
 import TextFieldCustomInput from "../../Atoms/TextFieldCustomInput";
+import FormikCustomInput from "../../Atoms/FormikCustomInput";
 
 import { addExperience } from "../../features/resumeSlice";
 
-const WorkExperience = ({ setInputs, inputs }) => {
-  const resume = useSelector(state => state.resume)
+const WorkExperience = ({ handleCloseForm, inputs, values }) => {
+  console.log("Work Values", values);
+  const resume = useSelector((state) => state.resume);
   const dispatch = useDispatch();
-
-  const handleChangeExperience = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((prevState) => ({
-      ...prevState,
-      workExperience: {
-        ...prevState.workExperience,
-        [name]: value,
-      },
-    }));
-  };
 
   const workExperience = ["jobTitle", "company"];
 
@@ -32,10 +22,10 @@ const WorkExperience = ({ setInputs, inputs }) => {
           {workExperience.map((experience) => (
             <Grid item key={experience} md={6} xs={12}>
               <Stack spacing={2}>
-                <TextFieldCustomInput
-                  name={experience}
-                  label={experience}
-                  onChange={handleChangeExperience}
+                <FormikCustomInput
+                  name={`workExperience.${experience}`}
+                  // label={experience}
+                  // onChange={handleChangeExperience}
                 />
               </Stack>
             </Grid>
@@ -43,14 +33,18 @@ const WorkExperience = ({ setInputs, inputs }) => {
         </Stack>
       </Grid>
       <Box>
-        <TextFieldCustomInput
+        <FormikCustomInput
           label="Work Description"
           multiline
-          onChange={handleChangeExperience}
-          name="description"
+          // onChange={handleChangeExperience}
+          name="workExperience.description"
         />
       </Box>
-      <Button variant="outlined" fullWidth onClick={() => dispatch(addExperience(inputs.workExperience))}>
+      <Button
+        variant="outlined"
+        fullWidth
+        onClick={() => {dispatch(addExperience(values)); handleCloseForm()}}
+      >
         Add Experience
       </Button>
     </Stack>
