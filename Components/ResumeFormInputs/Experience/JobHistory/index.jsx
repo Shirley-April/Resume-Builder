@@ -19,7 +19,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import WorkExperience from "../../WorkExperience";
 import EditExperence from "../EditExperience";
 
-const JobHistory = ({ form, handleOpenForm, handleCloseForm, values }) => {
+const JobHistory = ({
+  formOpen,
+  handleOpenForm,
+  handleCloseForm,
+  values,
+  newExperience,
+}) => {
   const jobHistory = useSelector((state) => state.resume.workExperience);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
@@ -31,7 +37,7 @@ const JobHistory = ({ form, handleOpenForm, handleCloseForm, values }) => {
   return (
     <Stack spacing={5}>
       <Stack spacing={1}>
-        {Object.entries(jobHistory).map(([key, value], index) => (
+        {jobHistory.map((value, index) => (
           <Box key={index}>
             <Accordion
               expanded={expanded === value.id}
@@ -55,20 +61,24 @@ const JobHistory = ({ form, handleOpenForm, handleCloseForm, values }) => {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>Display Form Here!</Typography>
-                <EditExperence value={value} />
+                <EditExperence value={value} index={index} />
               </AccordionDetails>
             </Accordion>
           </Box>
         ))}
-        {form ? null : (
+        {formOpen ? null : (
           <Button variant="contained" onClick={handleOpenForm}>
-            Add Experience
+            Add Experienceeeeeeeeeee
           </Button>
         )}
       </Stack>
-      {form && (
+      {formOpen && (
         <Stack spacing={2}>
-          <WorkExperience handleCloseForm={handleCloseForm} values={values} />{" "}
+          <WorkExperience
+            handleCloseForm={handleCloseForm}
+            values={values}
+            newExperience={newExperience}
+          />{" "}
           <Button variant="contained" onClick={handleCloseForm}>
             Close
           </Button>
