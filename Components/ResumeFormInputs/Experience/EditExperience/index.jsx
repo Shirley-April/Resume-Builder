@@ -3,14 +3,11 @@ import { editExperience } from "../../../../features/resumeSlice";
 
 import { Stack, Button, Grid, Box } from "@mui/material";
 import FormikCustomInput from "../../../../Atoms/FormikCustomInput";
+import { FieldArray } from "formik";
 
-const EditExperence = ({ value }) => {
+const EditExperence = ({ value, index }) => {
   const resume = useSelector((state) => state.resume);
   const dispatch = useDispatch();
-
-  // console.log("Edit value", value);
-
-  const payload = {};
 
   const workExperience = ["jobTitle", "company"];
 
@@ -18,37 +15,37 @@ const EditExperence = ({ value }) => {
     <Stack rowGap={3}>
       <Grid container>
         <Stack width="100%" direction="row" columnGap={3}>
-          {workExperience.map((experience) => (
-            <Grid item key={experience} md={6} xs={12}>
-              {console.log("VVVVV", value[experience])}
-              <Stack spacing={2}>
-                <FormikCustomInput
-                  name={`experience.${experience}`}
-                  // label={experience}
-                  // value={value[experience]}
-                  // defaultValue={value[experience]}
-                />
-              </Stack>
-            </Grid>
-          ))}
+          <FieldArray
+            name="workExperience"
+            render={(arrayHelpers) => (
+              <>
+                {workExperience.map((experience) => (
+                  <Grid item key={experience} md={6} xs={12}>
+                    <Stack spacing={2}>
+                      <FormikCustomInput
+                        name={`workExperience.${index}.${experience}`}
+                      />
+                    </Stack>
+                  </Grid>
+                ))}
+              </>
+            )}
+          />
         </Stack>
       </Grid>
       <Box>
         <FormikCustomInput
           label="Work Description"
-          // value={value.description}
           multiline
-          name="workExperience.description"
+          name={`workExperience.${index}.description`}
         />
       </Box>
       <Button
         variant="outlined"
         fullWidth
-        // onClick={() =>
-        //   dispatch(editExperience({ ...inputs.workExperience, id: value.id }))
-        // }
+        onClick={() => dispatch(editExperience({ ...value, id: value.id }))}
       >
-        Add Experience
+        Edit Experience
       </Button>
     </Stack>
   );

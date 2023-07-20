@@ -1,6 +1,15 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import { Form, Formik } from "formik";
 
 import dayjs from "dayjs";
+
+import resumeSlice, {
+  addContact,
+  addSummary,
+  addSkills,
+  addEducation,
+} from "../features/resumeSlice";
 
 import { Box, Button, Grid, Stack } from "@mui/material";
 
@@ -13,6 +22,10 @@ import Skills from "./ResumeFormInputs/Skills";
 import Education from "./ResumeFormInputs/Education";
 
 const Resume = () => {
+  const dispatch = useDispatch();
+
+  const resumeValues = useSelector((state) => state.resume);
+
   const initialValues = {
     contact: {
       jobTitle: "",
@@ -23,10 +36,11 @@ const Resume = () => {
       github: "",
     },
     summary: "",
-    workExperience: {
+    workExperience: resumeValues.workExperience || [],
+    newExperience: {
       jobTitle: "",
       company: "",
-      description: "NA",
+      description: "",
     },
     skills: "•",
     education: {
@@ -38,7 +52,10 @@ const Resume = () => {
   };
 
   const handleSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
+    dispatch(addContact(values.contact));
+    dispatch(addSummary(values.summary));
+    dispatch(addEducation(values.education));
+    dispatch(addSkills(values.skills));
   };
 
   return (
@@ -52,7 +69,10 @@ const Resume = () => {
                   <Stack p={8} spacing={2}>
                     <Contact />
                     <ProfessionalSummary />
-                    <Experience values={values.workExperience} />
+                    <Experience
+                      values={values.workExperience}
+                      newExperience={values.newExperience}
+                    />
                     <Skills />
                     <Education
                       setFieldValue={setFieldValue}
