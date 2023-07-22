@@ -21,10 +21,13 @@ import Experience from "./ResumeFormInputs/Experience";
 import Skills from "./ResumeFormInputs/Skills";
 import Education from "./ResumeFormInputs/Education";
 
+import {resumeInputsSchema} from "../utils/resumeInputsSchema";
+
 const Resume = () => {
   const dispatch = useDispatch();
 
   const resumeValues = useSelector((state) => state.resume);
+  console.log("All", resumeValues.workExperience);
 
   const initialValues = {
     contact: {
@@ -60,7 +63,12 @@ const Resume = () => {
 
   return (
     <Box>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        enableReinitialize={true}
+        validationSchema={resumeInputsSchema}
+      >
         {({ values, setFieldValue }) => (
           <Form>
             <Grid container sx={{ background: "#dcebf7" }} spacing={2}>
