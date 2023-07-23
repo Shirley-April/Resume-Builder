@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { deleteExperience } from "../../../../features/resumeSlice";
 
@@ -26,7 +26,6 @@ const JobHistory = ({
   values,
   newExperience,
 }) => {
-  const jobHistory = useSelector((state) => state.resume.workExperience);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
 
@@ -37,7 +36,7 @@ const JobHistory = ({
   return (
     <Stack spacing={5}>
       <Stack spacing={1}>
-        {jobHistory.map((value, index) => (
+        {values.map((value, index) => (
           <Box key={index}>
             <Accordion
               expanded={expanded === value.id}
@@ -68,7 +67,7 @@ const JobHistory = ({
         ))}
         {formOpen ? null : (
           <Button variant="contained" onClick={handleOpenForm}>
-            Add Experienceeeeeeeeeee
+            Add Experience
           </Button>
         )}
       </Stack>
