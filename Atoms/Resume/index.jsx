@@ -1,12 +1,22 @@
-import { Grid, Stack, Typography, Box } from "@mui/material";
+import {
+  Grid,
+  Stack,
+  Typography,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 import { data } from "./data";
 
-const Resume = ({ props }) => {
+const Resume = ({ resume }) => {
   return (
     <Stack border={1} p={2}>
       <Stack>
-        <Typography sx={{ fontWeight: "bold" }}>{data.contact.name}</Typography>
-        <Typography sx={{fontSize: 10}}>{data.contact.jobTitle}</Typography>
+        <Typography sx={{ fontWeight: "bold" }}>
+          {resume.contact.name}
+        </Typography>
+        <Typography sx={{ fontSize: 10 }}>{resume.contact.jobTitle}</Typography>
       </Stack>
       <Box pt={2}>
         <Grid container>
@@ -18,13 +28,13 @@ const Resume = ({ props }) => {
                   CONTACT
                 </Typography>
                 <Typography sx={{ fontSize: 10 }}>
-                  {data.contact.email}
+                  {resume.contact.email}
                 </Typography>
                 <Typography sx={{ fontSize: 10 }}>
-                  {data.contact.github}
+                  {resume.contact.github}
                 </Typography>
                 <Typography sx={{ fontSize: 10 }}>
-                  {data.contact.phone}
+                  {resume.contact.phone}
                 </Typography>
               </Stack>
 
@@ -33,11 +43,11 @@ const Resume = ({ props }) => {
                 <Typography sx={{ fontWeight: "bold", fontSize: 12 }}>
                   SKILLS
                 </Typography>
-                {data.skills.map((skill) => (
+                {/* {resume.skills.map((skill) => (
                   <Typography sx={{ fontSize: 10 }} key={skill}>
                     • {skill}
                   </Typography>
-                ))}
+                ))} */}
               </Stack>
 
               {/* EDUCATION */}
@@ -88,7 +98,7 @@ const Resume = ({ props }) => {
                 <Typography sx={{ fontWeight: "bold", fontSize: 12 }}>
                   PROFILE
                 </Typography>
-                <Typography sx={{ fontSize: 10 }}>{data.profile}</Typography>
+                <Typography sx={{ fontSize: 10 }}>{resume.summary}</Typography>
               </Stack>
 
               {/* EXPERIENCE */}
@@ -97,7 +107,7 @@ const Resume = ({ props }) => {
                   EXPERIENCE
                 </Typography>
                 <Stack spacing={1}>
-                  {data.experience.map((experience, index) => (
+                  {resume.workExperience.map((experience, index) => (
                     <Box key={index}>
                       <Typography sx={{ fontSize: 10 }}>
                         {experience.startDate} - {experience.endDate}
@@ -112,15 +122,50 @@ const Resume = ({ props }) => {
                       >
                         {experience.jobTitle} | {experience.company}
                       </Typography>
-                      {experience.description.map((duty, index) => (
-                        <Typography sx={{ fontSize: 10 }} key={index}>
-                          • {duty}
-                        </Typography>
-                      ))}
+                      <List
+                      disablePadding
+                        sx={{
+                          fontSize: 10,
+                          listStyleType: "disc",
+                          ml: "0.8rem",
+                        }}
+                      >
+                        <ListItem disablePadding disableGutters sx={{ display: "list-item" }}>
+                          <ListItemText
+                            primaryTypographyProps={{ fontSize: "10px" }}
+                            primary={experience.description}
+                          />
+                        </ListItem>
+                      </List>
                     </Box>
                   ))}
                 </Stack>
               </Stack>
+              {/* NEW EXPERIENCE */}
+             <Stack>
+             {resume.newExperience.jobTitle !== "" && (
+                <Typography
+                  sx={{
+                    fontSize: 10,
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    color: "#181818",
+                  }}
+                >
+                  {resume.newExperience.jobTitle} |{" "}
+                  {resume.newExperience.company}
+                </Typography>
+              )}
+
+              <List disablePadding sx={{ fontSize: 10, listStyleType: "disc", ml: "0.8rem" }}>
+                <ListItem disablePadding disableGutters sx={{ display: "list-item"}}>
+                  <ListItemText
+                    primaryTypographyProps={{ fontSize: "10px" }}
+                    primary={resume.newExperience.description}
+                  />
+                </ListItem>
+              </List>
+             </Stack>
             </Stack>
           </Grid>
         </Grid>
