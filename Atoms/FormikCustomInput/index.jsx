@@ -1,5 +1,5 @@
 import { TextField, InputAdornment } from "@mui/material";
-import { Field } from "formik";
+import { Field, ErrorMessage, getIn } from "formik";
 
 const FormikCustomInput = ({
   name,
@@ -12,14 +12,18 @@ const FormikCustomInput = ({
 }) => {
   return (
     <Field name={name}>
-      {({ field }) => (
+      {({ field, form }) => (
         <TextField
           {...field}
           select={select}
           multiline={multiline}
           fullWidth
           name={name}
-          value={value}
+          // value={value}
+          helperText={<ErrorMessage name={name} />}
+            error={Boolean(
+              getIn(form.touched, name) && getIn(form.errors, name)
+            )}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">{icon}</InputAdornment>
