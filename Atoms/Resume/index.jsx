@@ -123,49 +123,77 @@ const Resume = ({ resume }) => {
                         {experience.jobTitle} | {experience.company}
                       </Typography>
                       <List
-                      disablePadding
+                        disablePadding
+                        dense={true}
                         sx={{
                           fontSize: 10,
                           listStyleType: "disc",
                           ml: "0.8rem",
                         }}
                       >
-                        <ListItem disablePadding disableGutters sx={{ display: "list-item" }}>
-                          <ListItemText
-                            primaryTypographyProps={{ fontSize: "10px" }}
-                            primary={experience.description}
-                          />
-                        </ListItem>
+                        {experience.description
+                          .split("\n")
+                          .map((desc, index) => (
+                            <ListItem
+                              key={index}
+                              disablePadding
+                              disableGutters
+                              sx={{
+                                display: "list-item",
+                              }}
+                            >
+                              <ListItemText
+                                primaryTypographyProps={{ fontSize: "10px" }}
+                                primary={desc}
+                                sx={{ my: 0 }}
+                              />
+                            </ListItem>
+                          ))}
                       </List>
                     </Box>
                   ))}
                 </Stack>
               </Stack>
               {/* NEW EXPERIENCE */}
-             <Stack>
-             {resume.newExperience.jobTitle !== "" && (
-                <Typography
-                  sx={{
-                    fontSize: 10,
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    color: "#181818",
-                  }}
-                >
-                  {resume.newExperience.jobTitle} |{" "}
-                  {resume.newExperience.company}
-                </Typography>
-              )}
+              <Stack>
+                {resume.newExperience.jobTitle !== "" && (
+                  <Typography
+                    sx={{
+                      fontSize: 10,
+                      fontWeight: "bold",
+                      textTransform: "uppercase",
+                      color: "#181818",
+                    }}
+                  >
+                    {resume.newExperience.jobTitle} |{" "}
+                    {resume.newExperience.company}
+                  </Typography>
+                )}
 
-              <List disablePadding sx={{ fontSize: 10, listStyleType: "disc", ml: "0.8rem" }}>
-                <ListItem disablePadding disableGutters sx={{ display: "list-item"}}>
-                  <ListItemText
-                    primaryTypographyProps={{ fontSize: "10px" }}
-                    primary={resume.newExperience.description}
-                  />
-                </ListItem>
-              </List>
-             </Stack>
+                {resume.newExperience.description !== "" && (
+                  <List
+                    disablePadding
+                    dense={true}
+                    sx={{ fontSize: 10, listStyleType: "disc", ml: "0.8rem" }}
+                  >
+                    {resume.newExperience.description
+                      .split("\n")
+                      .map((desc, index) => (
+                        <ListItem
+                          key={index}
+                          disablePadding
+                          disableGutters
+                          sx={{ display: "list-item" }}
+                        >
+                          <ListItemText
+                            primaryTypographyProps={{ fontSize: "10px" }}
+                            primary={desc}
+                          />
+                        </ListItem>
+                      ))}
+                  </List>
+                )}
+              </Stack>
             </Stack>
           </Grid>
         </Grid>
