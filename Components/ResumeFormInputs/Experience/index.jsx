@@ -1,18 +1,14 @@
-import { useSelector } from "react-redux";
 import { useState } from "react";
 
-import { Typography, Stack, Button } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 
 import JobHistory from "./JobHistory";
 import WorkExperience from "../WorkExperience";
 
-const Experience = ({ values, newExperience }) => {
-  const jobExperience = useSelector((state) => state.resume.workExperience);
-
+const Experience = ({ values, newExperience, setFieldValue }) => {
   // if there is any job experiences on redux store then display them else nothing
-  let hasExperience = jobExperience.length ? true : false;
+  let hasExperience = values.length ? true : false;
 
-  const [experiences, setExperiences] = useState(hasExperience);
   const [formOpen, setFormOpen] = useState(false);
 
   const handleOpenForm = () => setFormOpen(true);
@@ -21,16 +17,22 @@ const Experience = ({ values, newExperience }) => {
   return (
     <Stack>
       <Typography variant="h5">Work Experience</Typography>
-      {experiences ? (
+      {hasExperience ? (
         <JobHistory
           formOpen={formOpen}
           handleOpenForm={handleOpenForm}
           handleCloseForm={handleCloseForm}
           values={values}
           newExperience={newExperience}
+          setFieldValue={setFieldValue}
         />
       ) : (
-        <WorkExperience values={values} newExperience={newExperience}  handleCloseForm={handleCloseForm} />
+        <WorkExperience
+          values={values}
+          newExperience={newExperience}
+          setFieldValue={setFieldValue}
+          handleCloseForm={handleCloseForm}
+        />
       )}
     </Stack>
   );
