@@ -26,8 +26,7 @@ import {resumeInputsSchema} from "../utils/resumeInputsSchema";
 const Resume = () => {
   const dispatch = useDispatch();
 
-  const resumeValues = useSelector((state) => state.resume);
-  console.log("All", resumeValues.workExperience);
+  const resumeValues = useSelector((state) => state.resume.workExperience);
 
   const initialValues = {
     contact: {
@@ -39,7 +38,7 @@ const Resume = () => {
       github: "",
     },
     summary: "",
-    workExperience: resumeValues.workExperience || [],
+    workExperience: resumeValues || [],
     newExperience: {
       jobTitle: "",
       company: "",
@@ -95,7 +94,7 @@ const Resume = () => {
               </Grid>
               <Grid item md={5}>
                 <Stack sx={{ background: "#ffffff" }}>
-                  <ResumePreview inputs={initialValues} />
+                  <ResumePreview resume={values} />
                 </Stack>
               </Grid>
             </Grid>
