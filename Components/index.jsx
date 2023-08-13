@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { Form, Formik } from "formik";
@@ -25,6 +27,7 @@ import {resumeInputsSchema} from "../utils/resumeInputsSchema";
 
 const Resume = () => {
   const dispatch = useDispatch();
+  const router = useRouter()
 
   const resumeValues = useSelector((state) => state.resume.workExperience);
 
@@ -58,6 +61,7 @@ const Resume = () => {
     dispatch(addSummary(values.summary));
     dispatch(addEducation(values.education));
     dispatch(addSkills(values.skills));
+    router.push("/final-resume")
   };
 
   return (
@@ -65,7 +69,6 @@ const Resume = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        enableReinitialize={true}
         validationSchema={resumeInputsSchema}
       >
         {({ values, setFieldValue }) => (
