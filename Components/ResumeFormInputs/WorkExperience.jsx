@@ -1,4 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
+import { useFormikContext } from "formik";
 
 import { Stack, Grid, Box, Button } from "@mui/material";
 
@@ -7,10 +9,27 @@ import FormikCustomInput from "../../Atoms/FormikCustomInput";
 import { addExperience } from "../../features/resumeSlice";
 
 const WorkExperience = ({ handleCloseForm, inputs, values, newExperience }) => {
-  const resume = useSelector((state) => state.resume);
   const dispatch = useDispatch();
 
+  const formik = useFormikContext();
+
   const workExperience = ["jobTitle", "company"];
+
+  const updateJobExp = () => {
+    const updatedExp = [...values, newExperience];
+
+    formik.resetForm({
+      values: {
+        ...formik.values,
+        newExperience: {
+          jobTitle: "",
+          company: "",
+          description: "",
+        },
+      },
+    });
+    formik.setFieldValue("workExperience", updatedExp);
+  };
 
   return (
     <Stack rowGap={3}>
@@ -19,9 +38,7 @@ const WorkExperience = ({ handleCloseForm, inputs, values, newExperience }) => {
           {workExperience.map((experience) => (
             <Grid item key={experience} md={6} xs={12}>
               <Stack spacing={2}>
-                <FormikCustomInput
-                  name={`newExperience.${experience}`}
-                />
+                <FormikCustomInput name={`newExperience.${experience}`} />
               </Stack>
             </Grid>
           ))}
@@ -40,6 +57,7 @@ const WorkExperience = ({ handleCloseForm, inputs, values, newExperience }) => {
         onClick={() => {
           dispatch(addExperience(newExperience));
           handleCloseForm();
+          updateJobExp();
         }}
       >
         Add Experience
