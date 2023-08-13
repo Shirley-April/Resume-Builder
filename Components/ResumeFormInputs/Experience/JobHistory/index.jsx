@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { useFormikContext } from "formik";
+
 import { deleteExperience } from "../../../../features/resumeSlice";
 
 import {
@@ -27,10 +29,18 @@ const JobHistory = ({
   newExperience,
 }) => {
   const dispatch = useDispatch();
+  const formik = useFormikContext();
+
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+  };
+
+  const handleDeleteExp = (value) => {
+    const updatedExp = values.filter((exp) => exp.id !== value.id);
+    dispatch(deleteExperience(value));
+    formik.setFieldValue("workExperience", updatedExp);
   };
 
   return (
@@ -53,7 +63,7 @@ const JobHistory = ({
                   <Typography>
                     {value.jobTitle} | {value.company}
                   </Typography>
-                  <IconButton onClick={() => dispatch(deleteExperience(value))}>
+                  <IconButton onClick={() => handleDeleteExp(value)}>
                     <DeleteIcon />
                   </IconButton>
                 </Stack>
