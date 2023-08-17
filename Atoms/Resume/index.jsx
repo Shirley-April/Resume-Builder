@@ -10,6 +10,7 @@ import {
 import { data } from "./data";
 
 const Resume = ({ resume }) => {
+  console.log("RRR", resume);
   return (
     <Stack border={1} p={2}>
       <Stack>
@@ -155,7 +156,7 @@ const Resume = ({ resume }) => {
                 </Stack>
               </Stack>
               {/* NEW EXPERIENCE */}
-              <Stack>
+              {/* <Stack>
                 {resume.newExperience.jobTitle !== "" && (
                   <Typography
                     sx={{
@@ -193,7 +194,7 @@ const Resume = ({ resume }) => {
                       ))}
                   </List>
                 )}
-              </Stack>
+              </Stack> */}
             </Stack>
           </Grid>
         </Grid>
