@@ -6,9 +6,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import FormikCustomInput from "../../Atoms/FormikCustomInput";
 
-const Education = ({ setFieldValue, values }) => {
-  console.log("Education Value", values.endDate);
-
+const Education = ({ setFieldValue }) => {
   const education = ["school", "fieldOfStudy"];
 
   return (
@@ -46,7 +44,6 @@ const Education = ({ setFieldValue, values }) => {
                 <DatePicker
                   label={"End Date"}
                   views={["month", "year"]}
-                  // value={values.endDate}
                   onChange={(newValue) =>
                     setFieldValue(
                       "education.endDate",

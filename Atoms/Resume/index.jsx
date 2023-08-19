@@ -9,8 +9,11 @@ import {
 } from "@mui/material";
 import { data } from "./data";
 
+import { useRouter } from "next/router";
+
 const Resume = ({ resume }) => {
-  console.log("RRR", resume);
+  const router = useRouter();
+
   return (
     <Stack border={1} p={2}>
       <Stack>
@@ -44,11 +47,33 @@ const Resume = ({ resume }) => {
                 <Typography sx={{ fontWeight: "bold", fontSize: 12 }}>
                   SKILLS
                 </Typography>
-                {/* {resume.skills.map((skill) => (
-                  <Typography sx={{ fontSize: 10 }} key={skill}>
-                    • {skill}
-                  </Typography>
-                ))} */}
+
+                <List
+                  disablePadding
+                  dense={true}
+                  sx={{
+                    fontSize: 10,
+                    listStyleType: "disc",
+                    ml: "0.8rem",
+                  }}
+                >
+                  {resume.skills.split("\n").map((skill, index) => (
+                    <ListItem
+                      key={index}
+                      disablePadding
+                      disableGutters
+                      sx={{
+                        display: "list-item",
+                      }}
+                    >
+                      <ListItemText
+                        primaryTypographyProps={{ fontSize: "10px" }}
+                        primary={skill}
+                        sx={{ my: 0 }}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
               </Stack>
 
               {/* EDUCATION */}
@@ -156,45 +181,47 @@ const Resume = ({ resume }) => {
                 </Stack>
               </Stack>
               {/* NEW EXPERIENCE */}
-              {/* <Stack>
-                {resume.newExperience.jobTitle !== "" && (
-                  <Typography
-                    sx={{
-                      fontSize: 10,
-                      fontWeight: "bold",
-                      textTransform: "uppercase",
-                      color: "#181818",
-                    }}
-                  >
-                    {resume.newExperience.jobTitle} |{" "}
-                    {resume.newExperience.company}
-                  </Typography>
-                )}
+              {router.pathname === "/create-resume" && (
+                <Stack>
+                  {resume.newExperience.jobTitle !== "" && (
+                    <Typography
+                      sx={{
+                        fontSize: 10,
+                        fontWeight: "bold",
+                        textTransform: "uppercase",
+                        color: "#181818",
+                      }}
+                    >
+                      {resume.newExperience.jobTitle} |{" "}
+                      {resume.newExperience.company}
+                    </Typography>
+                  )}
 
-                {resume.newExperience.description !== "" && (
-                  <List
-                    disablePadding
-                    dense={true}
-                    sx={{ fontSize: 10, listStyleType: "disc", ml: "0.8rem" }}
-                  >
-                    {resume.newExperience.description
-                      .split("\n")
-                      .map((desc, index) => (
-                        <ListItem
-                          key={index}
-                          disablePadding
-                          disableGutters
-                          sx={{ display: "list-item" }}
-                        >
-                          <ListItemText
-                            primaryTypographyProps={{ fontSize: "10px" }}
-                            primary={desc}
-                          />
-                        </ListItem>
-                      ))}
-                  </List>
-                )}
-              </Stack> */}
+                  {resume.newExperience.description !== "" && (
+                    <List
+                      disablePadding
+                      dense={true}
+                      sx={{ fontSize: 10, listStyleType: "disc", ml: "0.8rem" }}
+                    >
+                      {resume.newExperience.description
+                        .split("\n")
+                        .map((desc, index) => (
+                          <ListItem
+                            key={index}
+                            disablePadding
+                            disableGutters
+                            sx={{ display: "list-item" }}
+                          >
+                            <ListItemText
+                              primaryTypographyProps={{ fontSize: "10px" }}
+                              primary={desc}
+                            />
+                          </ListItem>
+                        ))}
+                    </List>
+                  )}
+                </Stack>
+              )}
             </Stack>
           </Grid>
         </Grid>
