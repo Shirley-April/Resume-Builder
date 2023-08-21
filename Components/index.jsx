@@ -23,11 +23,11 @@ import Experience from "./ResumeFormInputs/Experience";
 import Skills from "./ResumeFormInputs/Skills";
 import Education from "./ResumeFormInputs/Education";
 
-import {resumeInputsSchema} from "../utils/resumeInputsSchema";
+import { resumeInputsSchema } from "../utils/resumeInputsSchema";
 
 const Resume = () => {
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
   const resumeValues = useSelector((state) => state.resume.workExperience);
 
@@ -46,13 +46,15 @@ const Resume = () => {
       jobTitle: "",
       company: "",
       description: "",
+      startDate: dayjs(),
+      endDate: dayjs(),
     },
-    skills: "•",
+    skills: "",
     education: {
       school: "",
       fieldOfStudy: "",
-      startDate: dayjs("Jan 2023"),
-      endDate: dayjs("Dec 2023"),
+      startDate: dayjs(),
+      endDate: dayjs(),
     },
   };
 
@@ -61,7 +63,7 @@ const Resume = () => {
     dispatch(addSummary(values.summary));
     dispatch(addEducation(values.education));
     dispatch(addSkills(values.skills));
-    router.push("/final-resume")
+    router.push("/final-resume");
   };
 
   return (
