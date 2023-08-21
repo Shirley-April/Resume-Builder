@@ -54,30 +54,32 @@ const resumeSlice = createSlice({
           workExperience: state.workExperience.concat(action.payload),
         };
       },
-      prepare({ jobTitle, description, company }) {
+      prepare({ jobTitle, description, company, startDate, endDate }) {
         return {
           payload: {
             id: nanoid(),
             jobTitle,
             description,
             company,
+            startDate,
+            endDate,
           },
         };
       },
     },
     editExperience(state, action) {
-      console.log("Paaaayloooaaaad", action);
-      const { id, jobTitle, company, description } = action.payload;
+      const { id, jobTitle, company, description, startDate, endDate } =
+        action.payload;
       const existingExperience = state.workExperience.find(
         (exp) => exp.id === id
       );
-
-      console.log("EEEEEEEXXXXXX", existingExperience);
 
       if (existingExperience) {
         existingExperience.jobTitle = jobTitle;
         existingExperience.company = company;
         existingExperience.description = description;
+        existingExperience.startDate = startDate;
+        existingExperience.endDate = endDate;
       }
     },
     deleteExperience(state, action) {
