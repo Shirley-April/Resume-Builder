@@ -1,13 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { editExperience } from "../../../../features/resumeSlice";
 
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
+
 import { Stack, Button, Grid, Box } from "@mui/material";
 import FormikCustomInput from "../../../../Atoms/FormikCustomInput";
-import { FieldArray } from "formik";
+import { FieldArray, useFormikContext } from "formik";
 
 const EditExperence = ({ value, index }) => {
-  const resume = useSelector((state) => state.resume);
   const dispatch = useDispatch();
+
+  const formik = useFormikContext();
 
   const workExperience = ["jobTitle", "company"];
 
@@ -31,6 +37,42 @@ const EditExperence = ({ value, index }) => {
               </>
             )}
           />
+        </Stack>
+        <Stack width="100%" direction="row" columnGap={3} pt={3}>
+          <Grid item md={6} xs={12}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                name={`workExperience.${index}.startDate`}
+                label={"Start Date"}
+                views={["month", "year"]}
+                slotProps={{ textField: { fullWidth: true } }}
+                value={dayjs(formik.values.workExperience[index].startDate)}
+                onChange={(newValue) =>
+                  formik.setFieldValue(
+                    `workExperience.${index}.startDate`,
+                    newValue.format("MMMM YYYY")
+                  )
+                }
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                name={`workExperience.${index}.endDate`}
+                label={"End Date"}
+                views={["month", "year"]}
+                slotProps={{ textField: { fullWidth: true } }}
+                value={dayjs(formik.values.workExperience[index].endDate)}
+                onChange={(newValue) =>
+                  formik.setFieldValue(
+                    `workExperience.${index}.endDate`,
+                    newValue.format("MMMM YYYY")
+                  )
+                }
+              />
+            </LocalizationProvider>
+          </Grid>
         </Stack>
       </Grid>
       <Box>
