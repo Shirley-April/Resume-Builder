@@ -1,32 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "@reduxjs/toolkit";
 
-const initialState = [
-  {
-    resumeName: "",
-    contact: {
-      jobTitle: "",
-      name: "Shirley",
-      phone: "",
-      email: "",
-      linkedin: "",
-      github: "",
-    },
-    summary: "",
-    workExperience: [],
-    skills: "",
-    education: [],
-  },
-];
+const initialState = [];
 
 const resumeSlice = createSlice({
   name: "resume",
   initialState,
   reducers: {
-
     addResume: {
       reducer(state, action) {
-        state.push(action.payload)
+        state.push(action.payload);
       },
       prepare({
         resumeName,
@@ -49,9 +32,13 @@ const resumeSlice = createSlice({
         };
       },
     },
-    
+
     addContact(state, action) {
-      return { ...state, contact: action.payload };
+      const resumeId = action.payload.resumeId;
+      const existingResume = state.find((resume) => resume.id === resumeId);
+      if (existingResume) {
+        return { ...state, contact: action.payload };
+      }
     },
     // addContact: {
     //   reducer(state, action) {
