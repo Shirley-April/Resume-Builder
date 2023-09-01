@@ -34,30 +34,24 @@ const resumeSlice = createSlice({
     },
 
     addContact(state, action) {
-      const resumeId = action.payload.resumeId;
+      const { name, phone, email, github, jobTitle, linkedIn, resumeId } =
+        action.payload;
+
       const existingResume = state.find((resume) => resume.id === resumeId);
+
       if (existingResume) {
-        return { ...state, contact: action.payload };
+        existingResume.contact = {
+          ...existingResume.contact,
+          name,
+          phone,
+          email,
+          github,
+          jobTitle,
+          linkedIn,
+        };
       }
     },
-    // addContact: {
-    //   reducer(state, action) {
-    //     return { ...state, contact: action.payload };
-    //   },
-    //   prepare(jobTitle, name, phone, email, linkedin, github) {
-    //     return {
-    //       payload: {
-    //         id: nanoid(),
-    //         jobTitle,
-    //         name,
-    //         phone,
-    //         email,
-    //         linkedin,
-    //         github,
-    //       },
-    //     };
-    //   },
-    // },
+    
     editContact(state, action) {
       return {};
     },
