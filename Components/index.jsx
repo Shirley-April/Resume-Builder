@@ -44,7 +44,7 @@ const Resume = () => {
       linkedin: "",
       github: "",
     },
-    summary: "",
+    summary: resume?.summary || "",
     workExperience: resume?.workExperience || [],
     newExperience: {
       jobTitle: "Software Engineer",
@@ -53,7 +53,7 @@ const Resume = () => {
       startDate: dayjs("Aug 2022"),
       endDate: dayjs("Sep 2023"),
     },
-    skills: "",
+    skills: resume?.skills || "",
     education: {
       school: "",
       fieldOfStudy: "",
@@ -64,9 +64,9 @@ const Resume = () => {
 
   const handleSubmit = (values) => {
     dispatch(addContact({ ...values.contact, resumeId: id }));
-    // dispatch(addSummary(values.summary));
+    dispatch(addSummary({ summary: values.summary, resumeId: id }));
     // dispatch(addEducation(values.education));
-    // dispatch(addSkills(values.skills));
+    dispatch(addSkills({ skills: values.skills, resumeId: id }));
     // router.push("/final-resume");
   };
 
@@ -85,13 +85,13 @@ const Resume = () => {
                 <Stack sx={{ background: "#ffffff" }}>
                   <Stack p={8} spacing={2}>
                     <Contact />
-                    {/* <ProfessionalSummary /> */}
+                    <ProfessionalSummary />
                     <Experience
                       values={values.workExperience}
                       newExperience={values.newExperience}
                     />
-                    {/* <Skills />
-                    <Education
+                    <Skills />
+                    {/* <Education
                       setFieldValue={setFieldValue}
                       values={values.education}
                     /> */}

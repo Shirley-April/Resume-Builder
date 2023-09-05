@@ -52,7 +52,14 @@ const resumeSlice = createSlice({
       }
     },
     addSummary(state, action) {
-      return { ...state, summary: action.payload };
+      const { resumeId, summary } = action.payload;
+
+      const existingResume = state.find((resume) => resume.id === resumeId);
+
+      if (existingResume) {
+        existingResume.summary = summary
+      }
+      // return { ...state, summary: action.payload };
     },
     addExperience: {
       reducer(state, action) {
@@ -122,7 +129,13 @@ const resumeSlice = createSlice({
       }
     },
     addSkills(state, action) {
-      return { ...state, skills: action.payload };
+      const { resumeId, skills } = action.payload;
+
+      const existingResume = state.find((resume) => resume.id === resumeId);
+
+      if (existingResume) {
+        existingResume.skills = skills
+      }
     },
     addEducation(state, action) {
       return { ...state, education: state.education.concat(action.payload) };
