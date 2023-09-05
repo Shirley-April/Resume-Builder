@@ -53,7 +53,7 @@ const Resume = () => {
       startDate: dayjs("Aug 2022"),
       endDate: dayjs("Sep 2023"),
     },
-    skills: "",
+    skills: resume?.skills || "",
     education: {
       school: "",
       fieldOfStudy: "",
@@ -66,7 +66,7 @@ const Resume = () => {
     dispatch(addContact({ ...values.contact, resumeId: id }));
     dispatch(addSummary({ summary: values.summary, resumeId: id }));
     // dispatch(addEducation(values.education));
-    // dispatch(addSkills(values.skills));
+    dispatch(addSkills({ skills: values.skills, resumeId: id }));
     // router.push("/final-resume");
   };
 
@@ -82,7 +82,6 @@ const Resume = () => {
           <Form>
             <Grid container sx={{ background: "#dcebf7" }} spacing={2}>
               <Grid item md={7} border={1}>
-                {console.log("vals", values.summary)}
                 <Stack sx={{ background: "#ffffff" }}>
                   <Stack p={8} spacing={2}>
                     <Contact />
@@ -91,8 +90,8 @@ const Resume = () => {
                       values={values.workExperience}
                       newExperience={values.newExperience}
                     />
-                    {/* <Skills />
-                    <Education
+                    <Skills />
+                    {/* <Education
                       setFieldValue={setFieldValue}
                       values={values.education}
                     /> */}
