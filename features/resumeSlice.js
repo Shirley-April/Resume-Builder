@@ -51,21 +51,26 @@ const resumeSlice = createSlice({
         };
       }
     },
-    
-    editContact(state, action) {
-      return {};
-    },
     addSummary(state, action) {
       return { ...state, summary: action.payload };
     },
     addExperience: {
       reducer(state, action) {
-        return {
-          ...state,
-          workExperience: state.workExperience.concat(action.payload),
-        };
+        const { resumeId } = action.payload;
+        const resume = state.find((item) => item.id === resumeId);
+
+        if (resume) {
+          resume.workExperience.push(action.payload);
+        }
       },
-      prepare({ jobTitle, description, company, startDate, endDate }) {
+      prepare({
+        jobTitle,
+        description,
+        company,
+        startDate,
+        endDate,
+        resumeId,
+      }) {
         return {
           payload: {
             id: nanoid(),
@@ -74,23 +79,37 @@ const resumeSlice = createSlice({
             company,
             startDate,
             endDate,
+            resumeId,
           },
         };
       },
     },
     editExperience(state, action) {
-      const { id, jobTitle, company, description, startDate, endDate } =
-        action.payload;
-      const existingExperience = state.workExperience.find(
-        (exp) => exp.id === id
-      );
+      const {
+        id,
+        jobTitle,
+        company,
+        description,
+        startDate,
+        endDate,
+        resumeId,
+      } = action.payload;
 
-      if (existingExperience) {
-        existingExperience.jobTitle = jobTitle;
-        existingExperience.company = company;
-        existingExperience.description = description;
-        existingExperience.startDate = startDate;
-        existingExperience.endDate = endDate;
+      const existingResume = state.find((resume) => resume.id === resumeId);
+
+      if (existingResume) {
+        const existingExperience = existingResume.workExperience.find(
+          (exp) => exp.id === id
+        );
+
+        if (existingExperience) {
+          existingExperience.jobTitle = jobTitle;
+          existingExperience.company = company;
+          existingExperience.description = description;
+          existingExperience.startDate = startDate;
+          existingExperience.endDate = endDate;
+          existingExperience.id = id;
+        }
       }
     },
     deleteExperience(state, action) {
@@ -121,4 +140,5 @@ export const {
   addEducation,
   deleteExperience,
 } = resumeSlice.actions;
+
 export default resumeSlice.reducer;
