@@ -29,10 +29,14 @@ const Resume = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const resumeValues = useSelector((state) => state.resume.workExperience);
+  const { id } = router.query;
+
+  const resume = useSelector((state) =>
+    state.resume.find((resume) => resume.id === id)
+  );
 
   const initialValues = {
-    contact: {
+    contact: resume?.contact || {
       jobTitle: "",
       name: "",
       phone: "",
@@ -41,13 +45,13 @@ const Resume = () => {
       github: "",
     },
     summary: "",
-    workExperience: resumeValues || [],
+    workExperience: resume?.workExperience || [],
     newExperience: {
-      jobTitle: "",
-      company: "",
-      description: "",
-      startDate: dayjs(),
-      endDate: dayjs(),
+      jobTitle: "Software Engineer",
+      company: "IPAY",
+      description: "test",
+      startDate: dayjs("Aug 2022"),
+      endDate: dayjs("Sep 2023"),
     },
     skills: "",
     education: {
@@ -59,11 +63,11 @@ const Resume = () => {
   };
 
   const handleSubmit = (values) => {
-    dispatch(addContact(values.contact));
-    dispatch(addSummary(values.summary));
-    dispatch(addEducation(values.education));
-    dispatch(addSkills(values.skills));
-    router.push("/final-resume");
+    dispatch(addContact({ ...values.contact, resumeId: id }));
+    // dispatch(addSummary(values.summary));
+    // dispatch(addEducation(values.education));
+    // dispatch(addSkills(values.skills));
+    // router.push("/final-resume");
   };
 
   return (
@@ -71,7 +75,8 @@ const Resume = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={resumeInputsSchema}
+        enableReinitialize={true}
+        // validationSchema={resumeInputsSchema}
       >
         {({ values, setFieldValue }) => (
           <Form>
@@ -80,16 +85,16 @@ const Resume = () => {
                 <Stack sx={{ background: "#ffffff" }}>
                   <Stack p={8} spacing={2}>
                     <Contact />
-                    <ProfessionalSummary />
+                    {/* <ProfessionalSummary /> */}
                     <Experience
                       values={values.workExperience}
                       newExperience={values.newExperience}
                     />
-                    <Skills />
+                    {/* <Skills />
                     <Education
                       setFieldValue={setFieldValue}
                       values={values.education}
-                    />
+                    /> */}
 
                     <Button variant="contained" type="submit">
                       Submit
