@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 import { useDispatch } from "react-redux";
 
 import { useFormikContext } from "formik";
@@ -12,7 +14,12 @@ import FormikCustomInput from "../../Atoms/FormikCustomInput";
 
 import { addExperience } from "../../features/resumeSlice";
 
-const WorkExperience = ({ handleCloseForm, inputs, values, newExperience }) => {
+const WorkExperience = ({ handleCloseForm, values, newExperience }) => {
+
+  const router = useRouter();
+
+  const { id } = router.query;
+
   const dispatch = useDispatch();
 
   const formik = useFormikContext();
@@ -29,6 +36,7 @@ const WorkExperience = ({ handleCloseForm, inputs, values, newExperience }) => {
           jobTitle: "",
           company: "",
           description: "",
+          resumeId: id,
         },
       },
     });
@@ -90,11 +98,12 @@ const WorkExperience = ({ handleCloseForm, inputs, values, newExperience }) => {
           name="newExperience.description"
         />
       </Box>
+      
       <Button
         variant="outlined"
         fullWidth
         onClick={() => {
-          dispatch(addExperience(newExperience));
+          dispatch(addExperience({ ...newExperience, resumeId: id }));
           handleCloseForm();
           updateJobExp();
         }}
