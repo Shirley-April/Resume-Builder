@@ -51,10 +51,6 @@ const resumeSlice = createSlice({
         };
       }
     },
-
-    editContact(state, action) {
-      return {};
-    },
     addSummary(state, action) {
       return { ...state, summary: action.payload };
     },
@@ -88,26 +84,6 @@ const resumeSlice = createSlice({
         };
       },
     },
-    // addExperience: {
-    //   reducer(state, action) {
-    //     return {
-    //       ...state,
-    //       workExperience: state.workExperience.concat(action.payload),
-    //     };
-    //   },
-    //   prepare({ jobTitle, description, company, startDate, endDate }) {
-    //     return {
-    //       payload: {
-    //         id: nanoid(),
-    //         jobTitle,
-    //         description,
-    //         company,
-    //         startDate,
-    //         endDate,
-    //       },
-    //     };
-    //   },
-    // },
     editExperience(state, action) {
       const {
         id,
@@ -119,12 +95,9 @@ const resumeSlice = createSlice({
         resumeId,
       } = action.payload;
 
-      console.log("ID", id);
-
       const existingResume = state.find((resume) => resume.id === resumeId);
 
       if (existingResume) {
-
         const existingExperience = existingResume.workExperience.find(
           (exp) => exp.id === id
         );
@@ -135,19 +108,9 @@ const resumeSlice = createSlice({
           existingExperience.description = description;
           existingExperience.startDate = startDate;
           existingExperience.endDate = endDate;
+          existingExperience.id = id;
         }
       }
-      // const existingExperience = state.workExperience.find(
-      //   (exp) => exp.id === id
-      // );
-
-      // if (existingExperience) {
-      //   existingExperience.jobTitle = jobTitle;
-      //   existingExperience.company = company;
-      //   existingExperience.description = description;
-      //   existingExperience.startDate = startDate;
-      //   existingExperience.endDate = endDate;
-      // }
     },
     deleteExperience(state, action) {
       const existingExperience = state.workExperience.findIndex(
@@ -177,4 +140,5 @@ export const {
   addEducation,
   deleteExperience,
 } = resumeSlice.actions;
+
 export default resumeSlice.reducer;
