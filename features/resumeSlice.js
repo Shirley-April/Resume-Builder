@@ -129,7 +129,13 @@ const resumeSlice = createSlice({
       }
     },
     addSkills(state, action) {
-      return { ...state, skills: action.payload };
+      const { resumeId, skills } = action.payload;
+
+      const existingResume = state.find((resume) => resume.id === resumeId);
+
+      if (existingResume) {
+        existingResume.skills = skills
+      }
     },
     addEducation(state, action) {
       return { ...state, education: state.education.concat(action.payload) };
