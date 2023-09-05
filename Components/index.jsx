@@ -44,7 +44,7 @@ const Resume = () => {
       linkedin: "",
       github: "",
     },
-    summary: "",
+    summary: resume?.summary || "",
     workExperience: resume?.workExperience || [],
     newExperience: {
       jobTitle: "Software Engineer",
@@ -64,7 +64,7 @@ const Resume = () => {
 
   const handleSubmit = (values) => {
     dispatch(addContact({ ...values.contact, resumeId: id }));
-    // dispatch(addSummary(values.summary));
+    dispatch(addSummary({ summary: values.summary, resumeId: id }));
     // dispatch(addEducation(values.education));
     // dispatch(addSkills(values.skills));
     // router.push("/final-resume");
@@ -82,10 +82,11 @@ const Resume = () => {
           <Form>
             <Grid container sx={{ background: "#dcebf7" }} spacing={2}>
               <Grid item md={7} border={1}>
+                {console.log("vals", values.summary)}
                 <Stack sx={{ background: "#ffffff" }}>
                   <Stack p={8} spacing={2}>
                     <Contact />
-                    {/* <ProfessionalSummary /> */}
+                    <ProfessionalSummary />
                     <Experience
                       values={values.workExperience}
                       newExperience={values.newExperience}
