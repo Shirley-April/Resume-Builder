@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 import { useDispatch, useSelector } from "react-redux";
 import { editExperience } from "../../../../features/resumeSlice";
 
@@ -11,6 +13,9 @@ import FormikCustomInput from "../../../../Atoms/FormikCustomInput";
 import { FieldArray, useFormikContext } from "formik";
 
 const EditExperence = ({ value, index }) => {
+  const router = useRouter();
+  const { id } = router.query;
+
   const dispatch = useDispatch();
 
   const formik = useFormikContext();
@@ -85,7 +90,7 @@ const EditExperence = ({ value, index }) => {
       <Button
         variant="outlined"
         fullWidth
-        onClick={() => dispatch(editExperience({ ...value, id: value.id }))}
+        onClick={() => dispatch(editExperience({ ...value, id: value.id, resumeId: id }))}
       >
         Edit Experience
       </Button>
