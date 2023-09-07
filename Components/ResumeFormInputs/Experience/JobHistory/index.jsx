@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 
-import { useFormikContext } from "formik";
+import { useRouter } from "next/router";
+
+import { useDispatch } from "react-redux";
 
 import { deleteExperience } from "../../../../features/resumeSlice";
 
@@ -28,19 +29,15 @@ const JobHistory = ({
   values,
   newExperience,
 }) => {
+  const router = useRouter();
+  const { id } = router.query;
+
   const dispatch = useDispatch();
-  const formik = useFormikContext();
 
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
-  };
-
-  const handleDeleteExp = (value) => {
-    const updatedExp = values.filter((exp) => exp.id !== value.id);
-    dispatch(deleteExperience(value));
-    formik.setFieldValue("workExperience", updatedExp);
   };
 
   return (
@@ -63,7 +60,11 @@ const JobHistory = ({
                   <Typography>
                     {value.jobTitle} | {value.company}
                   </Typography>
-                  <IconButton onClick={() => handleDeleteExp(value)}>
+                  <IconButton
+                    onClick={() =>
+                      dispatch(deleteExperience({ ...value, resumeId: id }))
+                    }
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </Stack>

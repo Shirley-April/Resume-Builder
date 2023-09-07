@@ -57,9 +57,8 @@ const resumeSlice = createSlice({
       const existingResume = state.find((resume) => resume.id === resumeId);
 
       if (existingResume) {
-        existingResume.summary = summary
+        existingResume.summary = summary;
       }
-      // return { ...state, summary: action.payload };
     },
     addExperience: {
       reducer(state, action) {
@@ -120,12 +119,18 @@ const resumeSlice = createSlice({
       }
     },
     deleteExperience(state, action) {
-      const existingExperience = state.workExperience.findIndex(
-        (exp) => exp.id === action.payload.id
-      );
+      const { resumeId, id } = action.payload;
 
-      if (existingExperience !== -1) {
-        state.workExperience.splice(existingExperience, 1);
+      const existingResume = state.find((resume) => resume.id === resumeId);
+
+      if (existingResume) {
+        const existingExperience = existingResume.workExperience.findIndex(
+          (exp) => exp.id === id
+        );
+
+        if (existingExperience !== -1) {
+          existingExperience.workExperience.splice(existingExperience, 1);
+        }
       }
     },
     addSkills(state, action) {
@@ -134,7 +139,7 @@ const resumeSlice = createSlice({
       const existingResume = state.find((resume) => resume.id === resumeId);
 
       if (existingResume) {
-        existingResume.skills = skills
+        existingResume.skills = skills;
       }
     },
     addEducation(state, action) {
