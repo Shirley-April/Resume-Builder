@@ -16,7 +16,7 @@ const Experience = ({ values, newExperience, setFieldValue }) => {
 
   return (
     <Stack>
-      <Typography variant="h5">Work Experience</Typography>
+      <Typography variant="h5" fontWeight="bold">Work Experience</Typography>
       {hasExperience ? (
         <JobHistory
           formOpen={formOpen}
