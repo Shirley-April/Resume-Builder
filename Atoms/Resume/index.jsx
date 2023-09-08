@@ -11,6 +11,8 @@ import { data } from "./data";
 
 import { useRouter } from "next/router";
 
+import dayjs from "dayjs";
+
 const Resume = ({ resume }) => {
   const router = useRouter();
 
@@ -183,18 +185,24 @@ const Resume = ({ resume }) => {
               {/* NEW EXPERIENCE */}
               {router.pathname === "/create-resume" && (
                 <Stack>
-                  {resume.newExperience.jobTitle !== "" && (
-                    <Typography
-                      sx={{
-                        fontSize: 10,
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                        color: "#181818",
-                      }}
-                    >
-                      {resume.newExperience.jobTitle} |{" "}
-                      {resume.newExperience.company}
-                    </Typography>
+                  {(resume.newExperience.jobTitle !== "" ||
+                    resume.newExperience.company) && (
+                    <Box>
+                      <Typography sx={{ fontSize: 10 }}>
+                        {dayjs(resume.newExperience.startDate).format("MMMM YYYY")} - {dayjs(resume.newExperience.endDate).format("MMMM YYYY")}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: 10,
+                          fontWeight: "bold",
+                          textTransform: "uppercase",
+                          color: "#181818",
+                        }}
+                      >
+                        {resume.newExperience.jobTitle} |{" "}
+                        {resume.newExperience.company}
+                      </Typography>
+                    </Box>
                   )}
 
                   {resume.newExperience.description !== "" && (
