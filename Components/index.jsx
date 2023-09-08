@@ -47,11 +47,11 @@ const Resume = () => {
     summary: resume?.summary || "",
     workExperience: resume?.workExperience || [],
     newExperience: {
-      jobTitle: "Software Engineer",
-      company: "IPAY",
-      description: "test",
-      startDate: dayjs("Aug 2022"),
-      endDate: dayjs("Sep 2023"),
+      jobTitle: "",
+      company: "",
+      description: "",
+      startDate: dayjs(),
+      endDate: dayjs(),
     },
     skills: resume?.skills || "",
     education: {
@@ -67,7 +67,10 @@ const Resume = () => {
     dispatch(addSummary({ summary: values.summary, resumeId: id }));
     // dispatch(addEducation(values.education));
     dispatch(addSkills({ skills: values.skills, resumeId: id }));
-    // router.push("/final-resume");
+    router.push({
+      pathname: "/final-resume",
+      query: { id },
+    });
   };
 
   return (
