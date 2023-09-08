@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 import { useSelector } from "react-redux";
 
 import { Stack, Typography } from "@mui/material";
@@ -5,13 +7,16 @@ import { Stack, Typography } from "@mui/material";
 import Resume from "../Components/FinalResume";
 
 const FinalResume = () => {
-  const resume = useSelector((state) => state.resume);
+  const router = useRouter();
+  const { id } = router.query;
 
-  console.log(resume);
+  const resume = useSelector((state) =>
+    state.resume.find((res) => res.id === id)
+  );
 
   return (
     <Stack>
-      <Resume resume={resume} />
+      <Resume resume={resume} />{" "}
     </Stack>
   );
 };
