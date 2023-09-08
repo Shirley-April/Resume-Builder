@@ -8,7 +8,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 
-import { Stack, Button, Grid, Box } from "@mui/material";
+import { Stack, Button, Grid, Box, Typography } from "@mui/material";
 import FormikCustomInput from "../../../../Atoms/FormikCustomInput";
 import { FieldArray, useFormikContext } from "formik";
 
@@ -20,7 +20,10 @@ const EditExperence = ({ value, index }) => {
 
   const formik = useFormikContext();
 
-  const workExperience = ["jobTitle", "company"];
+  const workExperience = [
+    { name: "jobTitle", label: "Job Title" },
+    { name: "company", label: "Company" },
+  ];
 
   return (
     <Stack rowGap={3}>
@@ -28,13 +31,14 @@ const EditExperence = ({ value, index }) => {
         <Stack width="100%" direction="row" columnGap={3}>
           <FieldArray
             name="workExperience"
-            render={(arrayHelpers) => (
+            render={() => (
               <>
                 {workExperience.map((experience) => (
                   <Grid item key={experience} md={6} xs={12}>
-                    <Stack spacing={2}>
+                    <Stack>
+                      <Typography>{experience.label}</Typography>
                       <FormikCustomInput
-                        name={`workExperience.${index}.${experience}`}
+                        name={`workExperience.${index}.${experience.name}`}
                       />
                     </Stack>
                   </Grid>
@@ -81,6 +85,7 @@ const EditExperence = ({ value, index }) => {
         </Stack>
       </Grid>
       <Box>
+        <Typography>Work Description</Typography>
         <FormikCustomInput
           label="Work Description"
           multiline
@@ -90,7 +95,9 @@ const EditExperence = ({ value, index }) => {
       <Button
         variant="outlined"
         fullWidth
-        onClick={() => dispatch(editExperience({ ...value, id: value.id, resumeId: id }))}
+        onClick={() =>
+          dispatch(editExperience({ ...value, id: value.id, resumeId: id }))
+        }
       >
         Edit Experience
       </Button>

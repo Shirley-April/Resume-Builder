@@ -70,7 +70,6 @@ const JobHistory = ({
                 </Stack>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>Display Form Here!</Typography>
                 <EditExperence value={value} index={index} />
               </AccordionDetails>
             </Accordion>
