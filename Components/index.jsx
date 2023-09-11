@@ -15,7 +15,7 @@ import resumeSlice, {
 
 import { Box, Button, Grid, Stack } from "@mui/material";
 
-import LivePreview from "./ResumePreview";
+import LivePreview from "./LivePreview";
 
 import Contact from "./ResumeFormInputs/Contact";
 import ProfessionalSummary from "./ResumeFormInputs/ProfessionalSummary";
