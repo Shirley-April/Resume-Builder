@@ -14,7 +14,7 @@ const Skills = ({ setInputs }) => {
   // };
 
   return <Stack spacing={2}>
-    <Typography variant="h5">Skills</Typography>
+    <Typography variant="h5" fontWeight="bold">Skills</Typography>
     <Box>
       <FormikCustomInput
         name="skills"
