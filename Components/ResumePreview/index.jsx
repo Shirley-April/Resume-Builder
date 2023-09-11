@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import Resume from "../../Atoms/Resume";
 
-const ResumePreview = () => {
+const ResumePreview = ({resume}) => {
   return (
     <Box
       px={4}
@@ -15,7 +15,7 @@ const ResumePreview = () => {
         height: "100vh",
       }}
     >
-      <Resume />
+      <Resume resume={resume}/>
     </Box>
   );
 };

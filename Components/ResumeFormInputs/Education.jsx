@@ -1,29 +1,13 @@
 import { Stack, Typography, Grid } from "@mui/material";
-import dayjs from "dayjs";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import TextFieldCustomInput from "../../Atoms/TextFieldCustomInput";
-import { useState } from "react";
+import FormikCustomInput from "../../Atoms/FormikCustomInput";
 
-const Education = ({ setInputs }) => {
-  const [value, setValue] = useState(dayjs("2022-04-17"));
-
+const Education = ({ setFieldValue }) => {
   const education = ["school", "fieldOfStudy"];
-
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({
-      ...values,
-      education: {
-        ...values.education,
-        [name]: value,
-      },
-    }));
-  };
 
   return (
     <Stack>
@@ -31,11 +15,9 @@ const Education = ({ setInputs }) => {
       <Grid container spacing={3}>
         {education.map((education) => (
           <Grid item key={education} md={6} xs={12}>
-            <TextFieldCustomInput
+            <FormikCustomInput
               key={education}
-              name={education}
-              label={education}
-              onChange={handleChange}
+              name={`education.${education}`}
             />
           </Grid>
         ))}
@@ -44,15 +26,31 @@ const Education = ({ setInputs }) => {
             <Stack width="100%">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label="Start Date"
-                  value={value}
-                  onChange={(newValue) => setValue(newValue)}
+                  name="education.startDate"
+                  label={"Start Date"}
+                  views={["month", "year"]}
+                  // value={inputs.education.startDate}
+                  onChange={(newValue) =>
+                    setFieldValue(
+                      "education.startDate",
+                      newValue.format("MMMM YYYY")
+                    )
+                  }
                 />
               </LocalizationProvider>
             </Stack>
             <Stack width="100%">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker label="End Date" />
+                <DatePicker
+                  label={"End Date"}
+                  views={["month", "year"]}
+                  onChange={(newValue) =>
+                    setFieldValue(
+                      "education.endDate",
+                      newValue.format("MMMM YYYY")
+                    )
+                  }
+                />
               </LocalizationProvider>
             </Stack>
           </Stack>

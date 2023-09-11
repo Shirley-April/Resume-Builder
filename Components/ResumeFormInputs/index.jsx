@@ -1,53 +1,50 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
 
-import dayjs from "dayjs";
+import { useDispatch } from "react-redux";
+import {
+  addContact,
+  addSummary,
+  addEducation,
+  addSkills,
+} from "../../features/resumeSlice";
 
-import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Button, Stack } from "@mui/material";
 
 import Contact from "./Contact";
 import ProfessionalSummary from "./ProfessionalSummary";
-import WorkExperience from "./WorkExperience";
 import Skills from "./Skills";
 import Education from "./Education";
+import Experience from "./Experience";
 
 const ResumeFormInputs = ({ inputs, setInputs }) => {
-  const [value, setValue] = useState(dayjs("2022-04-17"));
+  const router = useRouter();
 
-  console.log("DATA", inputs);
-
-  const experiences = [
-    "Collaborated with team member to ensure...",
-    "Collaborated with team member to ensure...",
-  ];
-
-  const skills = [
-    "JavaScript",
-    "Next Js",
-    "Node Js",
-    "Material UI",
-    "React native",
-  ];
-
-  const education = ["School Name", "Field of study"];
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    alert(JSON.stringify(inputs, null, 2));
+    dispatch(addContact(inputs.contact));
+    dispatch(addSummary(inputs.summary));
+    dispatch(addEducation(inputs.education));
+    dispatch(addSkills(inputs.skills));
+    router.push("final-resume");
   };
 
   return (
     <Stack p={8} spacing={2}>
       <Contact setInputs={setInputs} />
       <ProfessionalSummary setInputs={setInputs} />
-      <WorkExperience setInputs={setInputs} />
-      <Skills setInputs={setInputs} />
-      <Education setInputs={setInputs} />
+      <Experience setInputs={setInputs} inputs={inputs} />
+      <Skills setInputs={setInputs} inputs={inputs} />
+      <Education setInputs={setInputs} inputs={inputs} />
 
-      <Button variant="contained" onClick={handleSubmit}>
+      {/* <Button
+        variant="contained"
+        onClick={() => {
+          handleSubmit();
+        }}
+      >
         Submit
-      </Button>
+      </Button> */}
     </Stack>
   );
 };

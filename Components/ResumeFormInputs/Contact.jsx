@@ -1,42 +1,29 @@
 import { Grid, Typography, Box, Stack } from "@mui/material";
-import TextFieldCustomInput from "../../Atoms/TextFieldCustomInput";
+import FormikCustomInput from "../../Atoms/FormikCustomInput";
 
-const Contact = ({ setInputs }) => {
-  const handleChangeContact = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({
-      ...values,
-      contact: {
-        ...values.contact,
-        [name]: value,
-      },
-    }));
-  };
-
+const Contact = () => {
   const contactInfo = [
-    "jobTitle",
-    "name",
-    "phone",
-    "email",
-    "linkedin",
-    "gitbub",
+    { name: "jobTitle", label: "Job Title" },
+    { name: "name", label: "Name" },
+    { name: "phone", label: "Phone" },
+    { name: "email", label: "Email" },
+    { name: "github", label: "Github" },
+    { name: "linkedin", label: "LinkedIn" },
   ];
-
-  const labels = ["Job Title", "Name", "Phone", "Email", "LinkedIn", "GitHub"];
 
   return (
     <Box>
-      <Typography variant="h5">Contact Info</Typography>
-      <Grid container spacing={3}>
+      <Typography variant="h5" fontWeight="bold">
+        Contact Info
+      </Typography>
+      <Grid container spacing={3} pt={0.5}>
         {contactInfo.map((contact, index) => (
           <Grid item xs={12} md={6} key={index}>
-            <Stack spacing={2}>
-              <TextFieldCustomInput
-                name={contact}
-                id={contact}
-                onChange={handleChangeContact}
-                label={contact}
+            <Stack spacing={0.5}>
+              <Typography>{contact.label}</Typography>
+              <FormikCustomInput
+                name={`contact.${contact.name}`}
+                id={`contact.${contact.name}`}
               />
             </Stack>
           </Grid>
