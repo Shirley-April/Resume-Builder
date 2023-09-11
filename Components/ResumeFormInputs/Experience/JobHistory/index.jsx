@@ -76,7 +76,7 @@ const JobHistory = ({
           </Box>
         ))}
         {formOpen ? null : (
-          <Button variant="contained" onClick={handleOpenForm}>
+          <Button variant="teal" onClick={handleOpenForm}>
             Add Experience
           </Button>
         )}
