@@ -10,7 +10,7 @@ const LivePreview = ({ resume }) => {
         fontWeight: "bold",
       },
       h2: {
-        fontSize: 12,
+        fontSize: 12, // mm
         fontWeight: "bold",
       },
       h3: {
