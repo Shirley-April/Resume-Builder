@@ -56,7 +56,7 @@ const Resume = ({ resume }) => {
                   sx={{
                     fontSize: 10,
                     listStyleType: "disc",
-                    ml: "0.8rem",
+                    ml: "1.2rem",
                   }}
                 >
                   {resume.skills.split("\n").map((skill, index) => (
@@ -156,7 +156,7 @@ const Resume = ({ resume }) => {
                         sx={{
                           fontSize: 10,
                           listStyleType: "disc",
-                          ml: "0.8rem",
+                          ml: "1.7rem",
                         }}
                       >
                         {experience.description
