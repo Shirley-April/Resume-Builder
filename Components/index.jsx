@@ -15,7 +15,7 @@ import resumeSlice, {
 
 import { Box, Button, Grid, Stack } from "@mui/material";
 
-import ResumePreview from "./ResumePreview";
+import LivePreview from "./ResumePreview";
 
 import Contact from "./ResumeFormInputs/Contact";
 import ProfessionalSummary from "./ResumeFormInputs/ProfessionalSummary";
@@ -107,7 +107,7 @@ const Resume = () => {
               </Grid>
               <Grid item md={5}>
                 <Stack sx={{ background: "#ffffff" }}>
-                  <ResumePreview resume={values} />
+                  <LivePreview resume={values} />
                 </Stack>
               </Grid>
             </Grid>
