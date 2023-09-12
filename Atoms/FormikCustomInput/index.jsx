@@ -17,7 +17,6 @@ const FormikCustomInput = ({
   onBlur,
   ...restProps
 }) => {
-
   return (
     <Field name={name}>
       {({ field, form }) => {
@@ -26,7 +25,7 @@ const FormikCustomInput = ({
             {...field}
             id={label}
             variant={variant}
-            type="text"
+            type={"text"}
             name={name}
             onChange={onChange !== null ? onChange : form.handleChange}
             onBlur={onBlur !== null ? onBlur : form.handleBlur}
@@ -35,7 +34,6 @@ const FormikCustomInput = ({
             error={Boolean(
               getIn(form.touched, name) && getIn(form.errors, name)
             )}
-            InputProps={{ style: { listStyleType: "disc" } }} // Add bullet points style to textarea
             placeholder={label}
             size="medium"
             fullWidth
