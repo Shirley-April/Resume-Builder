@@ -21,8 +21,8 @@ const EditExperence = ({ value, index }) => {
   const formik = useFormikContext();
 
   const workExperience = [
-    { name: "jobTitle", label: "Job Title" },
-    { name: "company", label: "Company" },
+    { id: 1, name: "jobTitle", label: "Job Title" },
+    { id: 2, name: "company", label: "Company" },
   ];
 
   return (
@@ -34,7 +34,7 @@ const EditExperence = ({ value, index }) => {
             render={() => (
               <>
                 {workExperience.map((experience) => (
-                  <Grid item key={experience} md={6} xs={12}>
+                  <Grid item key={experience.id} md={6} xs={12}>
                     <Stack>
                       <Typography>{experience.label}</Typography>
                       <FormikCustomInput

@@ -23,8 +23,8 @@ const WorkExperience = ({ handleCloseForm, newExperience }) => {
   const formik = useFormikContext();
 
   const workExperience = [
-    { name: "jobTitle", label: "Job Title" },
-    { name: "company", label: "Company" },
+    { name: "jobTitle", label: "Job Title", id: 1 },
+    { name: "company", label: "Company", id: 2 },
   ];
 
   return (
@@ -33,7 +33,7 @@ const WorkExperience = ({ handleCloseForm, newExperience }) => {
         <Stack spacing={3} width="100%">
           <Stack width="100%" direction="row" columnGap={3}>
             {workExperience.map((experience) => (
-              <Grid item key={experience} md={12} xs={12}>
+              <Grid item key={experience.id} md={12} xs={12}>
                 <Stack>
                   <Typography>{experience.label}</Typography>
                   <FormikCustomInput
