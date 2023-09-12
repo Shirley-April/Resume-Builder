@@ -38,7 +38,7 @@ const LivePreview = ({ resume }) => {
         right: 0,
         width: "40vw",
         background: "#fff",
-        height: "100vh",
+        minHeight: "100vh",
       }}
     >
       <Resume resume={resume} theme={theme} />

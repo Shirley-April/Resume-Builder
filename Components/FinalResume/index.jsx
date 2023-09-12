@@ -21,36 +21,44 @@ const FinalResume = ({ resume }) => {
       },
       subtitlebold: {
         fontWeight: "bold",
-        fontSize: 10,
+        fontSize: 14,
       },
       listFont: {
-        fontSize: 14
-      }
+        fontSize: 14,
+      },
     },
   });
   const sections = ["Contact", "Summary", "Experience", "Education", "Skills"];
 
   return (
-    <Stack alignItems="center" justifyContent="center" px={20}>
+    <Stack
+      alignItems="center"
+      justifyContent="center"
+      px={{ md: 20, xs: 2 }}
+      pb={10}
+      pt={5}
+    >
       <Typography>Resume Name</Typography>
-      <Grid container justifyContent="center" spacing={3}>
-        <Grid item md={9}>
-          <Resume resume={resume} theme={theme}/>
-        </Grid>
+      <Grid container justifyContent="center" spacing={6}>
         <Grid item md={3}>
           <Stack height="100%">
-            <Stack>
+            <Stack >
               <Typography sx={{ fontWeight: "bold" }}>
                 RESUME SECTIONS
               </Typography>
-              {sections.map((section, index) => (
-                <Typography key={index}>{section}</Typography>
-              ))}
+              <Stack spacing={2} >
+                {sections.map((section, index) => (
+                  <Typography key={index} sx={{borderBottom: 1}}>{section}</Typography>
+                ))}
+              </Stack>
             </Stack>
-            <Stack>
+            <Stack pt={3}>
               <Button variant="contained">Download</Button>
             </Stack>
           </Stack>
+        </Grid>
+        <Grid item md={9} xs={12}>
+          <Resume resume={resume} theme={theme} />
         </Grid>
       </Grid>
     </Stack>
