@@ -70,7 +70,10 @@ const Resume = ({ resume, theme }) => {
                           }}
                         >
                           <ListItemText
-                            primaryTypographyProps={{ fontSize: "10px" }}
+                            primaryTypographyProps={{
+                              fontSize:
+                                router.pathname === "/create-resume" ? 10 : 14,
+                            }}
                             primary={skill}
                             sx={{ my: 0 }}
                           />
@@ -133,7 +136,7 @@ const Resume = ({ resume, theme }) => {
                             disablePadding
                             dense={true}
                             sx={{
-                              fontSize: 16,
+                              fontSize: 12,
                               listStyleType: "disc",
                               ml: "1.7rem",
                             }}
@@ -151,7 +154,10 @@ const Resume = ({ resume, theme }) => {
                                 >
                                   <ListItemText
                                     primaryTypographyProps={{
-                                      fontSize: "14px",
+                                      fontSize:
+                                        router.pathname === "/create-resume"
+                                          ? 10
+                                          : 14,
                                     }}
                                     primary={desc}
                                     sx={{ my: 0 }}
@@ -205,7 +211,12 @@ const Resume = ({ resume, theme }) => {
                                 sx={{ display: "list-item" }}
                               >
                                 <ListItemText
-                                  primaryTypographyProps={{ fontSize: "10px" }}
+                                  primaryTypographyProps={{
+                                    fontSize:
+                                      router.pathname === "/create-resume"
+                                        ? 10
+                                        : 26,
+                                  }}
                                   primary={desc}
                                 />
                               </ListItem>
