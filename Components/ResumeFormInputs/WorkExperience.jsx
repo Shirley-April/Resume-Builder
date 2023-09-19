@@ -14,7 +14,7 @@ import FormikCustomInput from "../../Atoms/FormikCustomInput";
 
 import { addExperience } from "../../features/resumeSlice";
 
-const WorkExperience = ({ handleCloseForm, newExperience }) => {
+const WorkExperience = ({ handleCloseForm, values,   newExperience }) => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -26,6 +26,22 @@ const WorkExperience = ({ handleCloseForm, newExperience }) => {
     { name: "jobTitle", label: "Job Title", id: 1 },
     { name: "company", label: "Company", id: 2 },
   ];
+
+  const updateJobExp = () => {
+    const updatedExp = [...values, newExperience];
+
+    formik.resetForm({
+      values: {
+        ...formik.values,
+        newExperience: {
+          jobTitle: "",
+          company: "",
+          description: "",
+        },
+      },
+    });
+    formik.setFieldValue("workExperience", updatedExp);
+  };
 
   return (
     <Stack rowGap={3}>
@@ -93,6 +109,7 @@ const WorkExperience = ({ handleCloseForm, newExperience }) => {
         onClick={() => {
           dispatch(addExperience({ ...newExperience, resumeId: id }));
           handleCloseForm();
+          updateJobExp();
         }}
       >
         Add Experience
