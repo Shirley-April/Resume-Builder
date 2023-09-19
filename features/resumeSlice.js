@@ -129,7 +129,7 @@ const resumeSlice = createSlice({
         );
 
         if (existingExperience !== -1) {
-          existingExperience.workExperience.splice(existingExperience, 1);
+          existingResume.workExperience.splice(existingExperience, 1);
         }
       }
     },
