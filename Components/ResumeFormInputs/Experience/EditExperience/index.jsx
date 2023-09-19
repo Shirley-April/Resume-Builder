@@ -12,7 +12,7 @@ import { Stack, Button, Grid, Box, Typography } from "@mui/material";
 import FormikCustomInput from "../../../../Atoms/FormikCustomInput";
 import { FieldArray, useFormikContext } from "formik";
 
-const EditExperence = ({ value, index }) => {
+const EditExperence = ({ value, index, setExpanded }) => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -95,9 +95,10 @@ const EditExperence = ({ value, index }) => {
       <Button
         variant="outlined"
         fullWidth
-        onClick={() =>
-          dispatch(editExperience({ ...value, id: value.id, resumeId: id }))
-        }
+        onClick={() => {
+          dispatch(editExperience({ ...value, id: value.id, resumeId: id }));
+          setExpanded(false)
+        }}
       >
         Edit Experience
       </Button>

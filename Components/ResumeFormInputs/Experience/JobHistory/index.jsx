@@ -70,7 +70,12 @@ const JobHistory = ({
                 </Stack>
               </AccordionSummary>
               <AccordionDetails>
-                <EditExperence value={value} index={index} />
+                <EditExperence
+                  value={value}
+                  index={index}
+                  handleCloseForm={handleCloseForm}
+                  setExpanded={setExpanded}
+                />
               </AccordionDetails>
             </Accordion>
           </Box>
