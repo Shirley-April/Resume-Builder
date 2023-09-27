@@ -24,12 +24,24 @@ import Skills from "./ResumeFormInputs/Skills";
 import Education from "./ResumeFormInputs/Education";
 
 import { resumeInputsSchema } from "../utils/resumeInputsSchema";
+import { useEffect } from "react";
 
 const Resume = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { id } = router.query;
+  const resumee = useSelector((state) => state.resume);
+
+  let id;
+
+  resumee.length > 0 ? (id = resumee.at(-1).id) : null;
+
+  useEffect(() => {
+    router.push({
+      pathname: "/create-resume",
+      query: { id: id },
+    });
+  }, [id])
 
   const resume = useSelector((state) =>
     state.resume.find((resume) => resume.id === id)
@@ -99,7 +111,7 @@ const Resume = () => {
                       values={values.education}
                     /> */}
 
-                    <Button variant="contained" type="submit">
+                    <Button variant="teal" type="submit">
                       Submit
                     </Button>
                   </Stack>
