@@ -83,7 +83,7 @@ const Resume = ({ resume, theme }) => {
                   </Stack>
 
                   {/* EDUCATION */}
-                  <Stack pt={1}>
+                  {/* <Stack pt={1}>
                     <Typography variant="h2">EDUCATION</Typography>
                     <Stack spacing={1}>
                       {data.education.map((edu, index) => (
@@ -92,14 +92,14 @@ const Resume = ({ resume, theme }) => {
                             {edu.school}
                           </Typography>
                           <Typography>{edu.fieldOfStudy}</Typography>
-                          {/* <Typography sx={{fontSize: 10}}>{edu.}</Typography> */}
+                          <Typography sx={{fontSize: 10}}>{edu.}</Typography>
                         </Box>
                       ))}
                     </Stack>
-                  </Stack>
+                  </Stack> */}
 
                   {/* REFEREES */}
-                  <Stack>
+                  {/* <Stack>
                     <Typography variant="h2">REFEREES</Typography>
                     {data.referees.map((referee, index) => (
                       <Box key={index}>
@@ -110,7 +110,7 @@ const Resume = ({ resume, theme }) => {
                         <Typography> {referee.company}</Typography>
                       </Box>
                     ))}
-                  </Stack>
+                  </Stack> */}
                 </Stack>
               </Grid>
               <Grid item md={8} xs={8}>
