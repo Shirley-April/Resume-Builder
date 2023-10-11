@@ -13,7 +13,7 @@ const Home = () => {
     resumeName: "",
     contact: {
       jobTitle: "",
-      name: "Shirley",
+      name: "",
       phone: "",
       email: "",
       linkedin: "",
@@ -37,7 +37,7 @@ const Home = () => {
       <Stack
         alignItems="center"
         sx={{ border: 1, borderRadius: 2, py: 8, px: 4, cursor: "pointer" }}
-        onClick={handleCreateResume()}
+        onClick={handleCreateResume}
       >
         <Typography>+</Typography>
         <Typography>Create resume</Typography>

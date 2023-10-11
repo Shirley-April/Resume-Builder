@@ -90,7 +90,7 @@ const Resume = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        enableReinitialize={true}
+        // enableReinitialize={true}
         // validationSchema={resumeInputsSchema}
       >
         {({ values, setFieldValue }) => (
