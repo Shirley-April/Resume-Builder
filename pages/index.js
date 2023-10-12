@@ -2,8 +2,16 @@ import { useRouter } from "next/router";
 
 import { useDispatch } from "react-redux";
 
-import { Stack, Typography } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { addResume } from "../features/resumeSlice";
+import { useState } from "react";
 
 const Home = () => {
   const router = useRouter();
@@ -25,6 +33,12 @@ const Home = () => {
     education: [],
   };
 
+  const [resume, setResume] = useState(newResume);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const handleCreateResume = () => {
     dispatch(addResume(newResume));
     router.push({
@@ -37,11 +51,28 @@ const Home = () => {
       <Stack
         alignItems="center"
         sx={{ border: 1, borderRadius: 2, py: 8, px: 4, cursor: "pointer" }}
-        onClick={handleCreateResume}
+        onClick={handleOpen}
       >
         <Typography>+</Typography>
-        <Typography>Create resume</Typography>
+        <Typography>New resume</Typography>
       </Stack>
+
+      {/* Resume Name Dialog */}
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+        <DialogContent>
+          <Stack spacing={2}>
+            <Typography variant="h6">Resume Name</Typography>
+            <TextField
+              label="eg JOHN DOE CV"
+              name="resumeName"
+              required
+              value={resume.resumeName}
+              onChange={(e) => setResume({...resume, resumeName: e.target.value})}
+            />
+            <Button variant="teal" onClick={handleCreateResume}>Create</Button>
+          </Stack>
+        </DialogContent>
+      </Dialog>
     </Stack>
   );
 };
