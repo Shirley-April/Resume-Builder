@@ -30,6 +30,8 @@ const Resume = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const { edit } = router.query;
+
   const resumee = useSelector((state) => state.resume);
 
   let id;
@@ -37,11 +39,13 @@ const Resume = () => {
   resumee.length > 0 ? (id = resumee.at(-1).id) : null;
 
   useEffect(() => {
-    router.push({
-      pathname: "/create-resume",
-      query: { id: id },
-    });
-  }, [id])
+    if (!edit) {
+      router.push({
+        pathname: "/create-resume",
+        query: { id: id },
+      });
+    }
+  }, [id]);
 
   const resume = useSelector((state) =>
     state.resume.find((resume) => resume.id === id)
