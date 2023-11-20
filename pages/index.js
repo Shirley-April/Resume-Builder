@@ -18,6 +18,7 @@ import {
 import { addResume } from "../features/resumeSlice";
 
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Home = () => {
   const router = useRouter();
@@ -62,31 +63,49 @@ const Home = () => {
   };
 
   return (
-    <Box>
-      <Grid container py={15} px={5}>
+    <Box sx={{ px: 20, py: 10 }}>
+      {allResumes.length >= 1 ? (
+        <Stack justifyContent="flex-end" alignItems="flex-end">
+          <Button variant="teal" onClick={handleOpen}>
+            Create Resume
+          </Button>
+        </Stack>
+      ) : null}
+      <Grid container px={5} spacing={3}>
         {allResumes.map((resume) => (
           <Grid
             item
             key={resume.id}
             md={2}
-            sx={{ py: 8, px: 4, border: 1, borderRadius: 2 }}
+            sx={{ py: 8, px: 4, border: 1, borderRadius: 2, m: 4 }}
           >
-            <Typography>{resume.resumeName}</Typography>
-            <IconButton onClick={() => handleEditResume(resume.id)}>
-              <EditIcon />
-            </IconButton>
+            <Stack justifyContent="center" alignItems="center" spacing={2}>
+              <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
+                {resume.resumeName}
+              </Typography>
+              <Stack direction="row" spacing={1}>
+                <IconButton onClick={() => handleEditResume(resume.id)}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton onClick={() => handleEditResume(resume.id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </Stack>
+            </Stack>
           </Grid>
         ))}
       </Grid>
       <Stack justifyContent="center" alignItems="center">
-        <Stack
-          alignItems="center"
-          sx={{ border: 1, borderRadius: 2, py: 8, px: 4, cursor: "pointer" }}
-          onClick={handleOpen}
-        >
-          <Typography>+</Typography>
-          <Typography>New resume</Typography>
-        </Stack>
+        {allResumes.length >= 1 ? null : (
+          <Stack
+            alignItems="center"
+            sx={{ border: 1, borderRadius: 2, py: 8, px: 4, cursor: "pointer" }}
+            onClick={handleOpen}
+          >
+            <Typography>+</Typography>
+            <Typography>New resume</Typography>
+          </Stack>
+        )}
 
         {/* Resume Name Dialog */}
         <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
