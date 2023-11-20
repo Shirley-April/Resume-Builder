@@ -33,6 +33,16 @@ const resumeSlice = createSlice({
       },
     },
 
+    deleteResume(state, action) {
+      const { resumeId } = action.payload;
+
+      const existingResume = state.findIndex((resume) => resume.id === resumeId);
+
+      if (existingResume) {
+        state.splice(existingResume, 1);
+      }
+    },
+
     addContact(state, action) {
       const { name, phone, email, github, jobTitle, linkedIn, resumeId } =
         action.payload;
@@ -150,6 +160,7 @@ const resumeSlice = createSlice({
 
 export const {
   addResume,
+  deleteResume,
   addExperience,
   editExperience,
   addContact,
