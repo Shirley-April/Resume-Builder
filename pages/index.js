@@ -15,7 +15,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { addResume } from "../features/resumeSlice";
+import { addResume, deleteResume } from "../features/resumeSlice";
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -63,7 +63,7 @@ const Home = () => {
   };
 
   return (
-    <Box sx={{ px: 20, py: 10 }}>
+    <Box sx={{ px: {md: 10, xs: 5}, py: 10 }}>
       {allResumes.length >= 1 ? (
         <Stack justifyContent="flex-end" alignItems="flex-end">
           <Button variant="teal" onClick={handleOpen}>
@@ -71,7 +71,7 @@ const Home = () => {
           </Button>
         </Stack>
       ) : null}
-      <Grid container px={5} spacing={3}>
+      <Grid container spacing={3}>
         {allResumes.map((resume) => (
           <Grid
             item
@@ -87,7 +87,7 @@ const Home = () => {
                 <IconButton onClick={() => handleEditResume(resume.id)}>
                   <EditIcon />
                 </IconButton>
-                <IconButton onClick={() => handleEditResume(resume.id)}>
+                <IconButton onClick={() => dispatch(deleteResume(resume.id))}>
                   <DeleteIcon />
                 </IconButton>
               </Stack>
