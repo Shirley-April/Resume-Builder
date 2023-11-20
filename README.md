@@ -1,34 +1,72 @@
-This is a resume builder built using Next Js, Redux, Material UI & PDFkit
+# Resume Builder
 
-## Getting Started
+Resume Builder is a user-friendly web application designed to simplify the resume creation process. 📄✨
 
-First, run the development server:
+## Technologies Used
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Frontend
+- [Next.js](https://nextjs.org/)
+- [Material UI](https://material-ui.com/)
+- [Redux](https://redux.js.org/)
+- [Redux Persist](https://github.com/rt2zz/redux-persist)
+- [Formik](https://formik.org/)
+- [Yup](https://github.com/jquense/yup)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Backend
+- [Express.js](https://expressjs.com/)
+- [Dropbox](https://www.dropbox.com/)
+- [PDFkit](https://pdfkit.org/)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Running the Application
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+The application is hosted [here](https://resume-builder-one-navy.vercel.app/). Additionally, you need to run the backend locally; instructions for setting up the backend can be found [here](https://resume-builder-one-navy.vercel.app/).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Running the Frontend Locally
 
-## Learn More
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Shirley-April/Resume-Builder.git
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Switch to the Resume-Builder directory:**
+   ```bash
+   cd Resume-Builder
+   
+3. **Install dependencies:**
+   ```bash
+   npm install
+4. **Run the application:**
+   ```bash
+   npx next
+   
+## Contribution Guidelines
+We welcome contributions to enhance Resume Builder! If you'd like to contribute, please follow these guidelines:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Fork the repository:**
 
-## Deploy on Vercel
+Click on the "Fork" button at the top right of the [repository page](https://github.com/Shirley-April/Resume-Builder).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Clone your fork:**
+   ```bash
+   git clone https://github.com/your-username/Resume-Builder.git
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. **Create a new branch:**
+   ```bash
+   git checkout -b feature/new-feature
+   
+4. **Make your changes and commit:**
+   ```bash
+   git add .
+   git commit -m "Add new feature"
+   
+5. **Push to your fork:**
+   ```bash
+   git push origin feature/new-feature
+
+6. **Create a Pull Request:**
+>>>
+> - Go to your fork on GitHub and click on "New Pull Request."
+> -  Provide a detailed description of your changes.
+> - Submit the Pull Request.
+
+Thank you for reading this far! 🚀
