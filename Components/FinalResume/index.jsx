@@ -99,7 +99,7 @@ const FinalResume = ({ resume }) => {
           </Stack>
         </Grid>
         <Grid item md={9} xs={12}>
-          <Typography>{resume.resumeName}</Typography>
+          <Typography>{resume?.resumeName}</Typography>
           <Resume resume={resume} theme={theme} />
         </Grid>
       </Grid>
